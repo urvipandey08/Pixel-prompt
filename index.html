@@ -1,0 +1,2027 @@
+<!DOCTYPE html><html class="scroll-smooth" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>ABYSSÉ — Café &amp; Lounge Beneath the Blue</title>
+<!-- Google Fonts: Playfair Display & Plus Jakarta Sans -->
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&amp;family=Plus+Jakarta+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
+<!-- Tailwind CSS CDN -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Configuration matching Design System: Abyssal Luminescence -->
+<script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            surface: {
+              DEFAULT: '#001524',
+              dim: '#001524',
+              bright: '#263b4d',
+              lowest: '#00101c',
+              low: '#051d2d',
+              mid: '#0c273a',
+            },
+            aqua: {
+              DEFAULT: '#38d6d0',
+              glow: '#38d6d0',
+              muted: '#187b77',
+              deep: '#0b4d4b'
+            },
+            coral: {
+              DEFAULT: '#ffad9c',
+              light: '#ffd2ca'
+            },
+            pearl: {
+              DEFAULT: '#cfe5fb',
+              dim: '#9bb8d7',
+              pure: '#f4faff'
+            }
+          },
+          fontFamily: {
+            serif: ['"Playfair Display"', 'serif'],
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+          },
+          boxShadow: {
+            'glow-aqua': '0 0 25px rgba(56, 214, 208, 0.35)',
+            'glow-aqua-lg': '0 0 45px rgba(56, 214, 208, 0.45)',
+            'glow-coral': '0 0 25px rgba(255, 173, 156, 0.35)',
+            'glow-jelly': '0 0 60px rgba(56, 214, 208, 0.5), 0 0 100px rgba(147, 51, 234, 0.3)',
+            'wavy-nav': '0 12px 35px -8px rgba(0, 16, 28, 0.85), 0 0 24px 1px rgba(56, 214, 208, 0.22)'
+          }
+        }
+      }
+    };
+  </script>
+<!-- Custom Styles: Core Layout & Atmospheric Lighting -->
+<style data-purpose="layout-atmospheric">
+    body {
+      background-color: #00101c;
+      color: #cfe5fb;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      overflow-x: hidden;
+      cursor: default;
+    }
+
+    /* Ambient animated underwater caustics gradient */
+    .ocean-abyss-bg {
+      background: radial-gradient(circle at 50% 10%, rgba(24, 123, 119, 0.22) 0%, transparent 60%),
+                  linear-gradient(180deg, #001524 0%, #051d2d 40%, #00101c 100%);
+    }
+
+    /* Subtle cursor water halo (desktop) */
+    #cursor-halo {
+      pointer-events: none;
+      transform: translate(-50%, -50%);
+      transition: width 0.3s ease, height 0.3s ease, opacity 0.2s ease;
+      background: radial-gradient(circle, rgba(56, 214, 208, 0.18) 0%, rgba(56, 214, 208, 0) 70%);
+    }
+
+    /* Glassmorphic panels */
+    .glass-card {
+      background: rgba(5, 29, 45, 0.58);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid rgba(56, 214, 208, 0.18);
+    }
+    
+    .glass-card-hover {
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .glass-card-hover:hover {
+      transform: translateY(-4px);
+      border-color: rgba(56, 214, 208, 0.45);
+      box-shadow: 0 12px 36px rgba(0, 16, 28, 0.8), 0 0 20px rgba(56, 214, 208, 0.2);
+    }
+
+    /* Floating Wavy Oceanic Header Styles */
+    @keyframes oceanicSwellBob {
+      0%, 100% {
+        transform: translateY(0px) rotate(0deg);
+      }
+      25% {
+        transform: translateY(-3px) rotate(0.35deg);
+      }
+      50% {
+        transform: translateY(2px) rotate(-0.25deg);
+      }
+      75% {
+        transform: translateY(-1.5px) rotate(0.2deg);
+      }
+    }
+
+    .wavy-nav-container {
+      animation: oceanicSwellBob 9s ease-in-out infinite;
+      will-change: transform;
+    }
+
+    /* Fluid undulating morphing contour border for navbar capsule */
+    @keyframes fluidWaveContour {
+      0%, 100% {
+        border-radius: 46px 52px 42px 50px / 50px 44px 52px 46px;
+      }
+      33% {
+        border-radius: 52px 42px 50px 45px / 44px 52px 46px 52px;
+      }
+      66% {
+        border-radius: 44px 50px 46px 54px / 52px 46px 48px 50px;
+      }
+    }
+
+    .wavy-nav-capsule {
+      background: rgba(4, 23, 37, 0.76);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border: 1px solid rgba(56, 214, 208, 0.28);
+      animation: fluidWaveContour 14s ease-in-out infinite;
+      box-shadow: 0 14px 40px -10px rgba(0, 16, 28, 0.9), 0 0 25px rgba(56, 214, 208, 0.25), inset 0 1px 1px rgba(207, 229, 251, 0.2);
+      transition: border-color 0.4s ease, box-shadow 0.4s ease;
+    }
+
+    .wavy-nav-capsule:hover {
+      border-color: rgba(56, 214, 208, 0.48);
+      box-shadow: 0 16px 45px -8px rgba(0, 16, 28, 0.95), 0 0 35px rgba(56, 214, 208, 0.38), inset 0 1px 2px rgba(207, 229, 251, 0.3);
+    }
+  </style>
+<!-- Custom Styles: Micro-Animations & Equalizer -->
+<style data-purpose="animations">
+    @keyframes subtleFloat {
+      0%, 100% { transform: translateY(0px) rotate(0deg); }
+      50% { transform: translateY(-8px) rotate(0.8deg); }
+    }
+    .animate-float {
+      animation: subtleFloat 7s ease-in-out infinite;
+    }
+
+    @keyframes riseBubble {
+      0% { transform: translateY(100%) scale(0.6); opacity: 0; }
+      40% { opacity: 0.5; }
+      90% { opacity: 0.7; }
+      100% { transform: translateY(-120vh) scale(1.1); opacity: 0; }
+    }
+    .bubble {
+      position: fixed;
+      bottom: -40px;
+      background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.7), rgba(56,214,208,0.2) 70%);
+      border-radius: 9999px;
+      pointer-events: none;
+      z-index: 10;
+      animation: riseBubble linear infinite;
+    }
+
+    /* Audio Equalizer Bars */
+    .eq-bar {
+      transition: height 0.2s ease;
+    }
+    .eq-playing .eq-bar:nth-child(1) { animation: soundBar 0.9s infinite alternate ease-in-out; }
+    .eq-playing .eq-bar:nth-child(2) { animation: soundBar 0.7s infinite alternate ease-in-out 0.2s; }
+    .eq-playing .eq-bar:nth-child(3) { animation: soundBar 1.1s infinite alternate ease-in-out 0.1s; }
+    .eq-playing .eq-bar:nth-child(4) { animation: soundBar 0.8s infinite alternate ease-in-out 0.3s; }
+
+    @keyframes soundBar {
+      0% { height: 4px; }
+      100% { height: 16px; }
+    }
+
+    /* Bioluminescent Jellyfish Animations */
+    @keyframes jellyPulseAmbient {
+      0%, 100% {
+        transform: scale(1) translateY(0px);
+      }
+      38% {
+        transform: scale(1.04, 0.94) translateY(-14px);
+      }
+      65% {
+        transform: scale(0.97, 1.03) translateY(-4px);
+      }
+    }
+    .jelly-swim {
+      animation: jellyPulseAmbient 5.8s ease-in-out infinite;
+      transform-origin: 50% 35%;
+    }
+
+    @keyframes tentacleSway1 {
+      0%, 100% { transform: rotate(0deg) skewX(0deg); }
+      50% { transform: rotate(4.5deg) skewX(3deg); }
+    }
+    @keyframes tentacleSway2 {
+      0%, 100% { transform: rotate(0deg) skewX(0deg); }
+      50% { transform: rotate(-5deg) skewX(-4deg); }
+    }
+    @keyframes tentacleSway3 {
+      0%, 100% { transform: rotate(0deg); }
+      50% { transform: rotate(2.5deg) scaleY(1.05); }
+    }
+    .sway-1 { animation: tentacleSway1 4.6s ease-in-out infinite; transform-origin: top center; }
+    .sway-2 { animation: tentacleSway2 5.2s ease-in-out infinite 0.5s; transform-origin: top center; }
+    .sway-3 { animation: tentacleSway3 3.9s ease-in-out infinite 0.8s; transform-origin: top center; }
+
+    @keyframes rippleExpand {
+      0% { transform: translate(-50%, -50%) scale(0.2); opacity: 0.95; }
+      100% { transform: translate(-50%, -50%) scale(3.2); opacity: 0; }
+    }
+    .ripple-wave {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 150px;
+      height: 150px;
+      border-radius: 9999px;
+      border: 2px solid rgba(56, 214, 208, 0.9);
+      box-shadow: 0 0 35px rgba(56, 214, 208, 0.7);
+      pointer-events: none;
+      animation: rippleExpand 1.6s cubic-bezier(0.1, 0.8, 0.3, 1) forwards;
+    }
+
+    @keyframes sparkDrift {
+      0% { transform: translate(0, 0) scale(0.5); opacity: 1; }
+      100% { transform: translate(var(--dx), var(--dy)) scale(1.4); opacity: 0; }
+    }
+    .jelly-spark {
+      position: absolute;
+      border-radius: 9999px;
+      background: radial-gradient(circle, #fff, #38d6d0);
+      box-shadow: 0 0 10px #38d6d0;
+      pointer-events: none;
+      animation: sparkDrift 1.8s ease-out forwards;
+    }
+
+    @keyframes innerCoreBreathe {
+      0%, 100% { opacity: 0.65; filter: drop-shadow(0 0 16px rgba(56,214,208,0.4)); }
+      50% { opacity: 0.95; filter: drop-shadow(0 0 32px rgba(56,214,208,0.85)); }
+    }
+    .jelly-core-glow {
+      animation: innerCoreBreathe 3.4s ease-in-out infinite;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, ::before, ::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+      .jelly-swim, .sway-1, .sway-2, .sway-3, .jelly-core-glow, .wavy-nav-container, .wavy-nav-capsule {
+        animation: none !important;
+      }
+    }
+  </style>
+</head>
+<body class="ocean-abyss-bg relative selection:bg-aqua selection:text-surface-lowest" style="background: linear-gradient(rgb(18, 114, 158) 0%, rgb(13, 89, 126) 4%, rgb(8, 61, 93) 10%, rgb(6, 48, 75) 18%, rgb(4, 36, 58) 28%, rgb(3, 26, 44) 40%, rgb(2, 17, 31) 54%, rgb(1, 10, 20) 68%, rgb(0, 6, 13) 82%, rgb(0, 3, 7) 92%, rgb(0, 0, 0) 100%) !important;">
+<!-- Desktop Interactive Cursor Glow -->
+<div aria-hidden="true" class="hidden md:block fixed w-72 h-72 rounded-full z-40 pointer-events-none opacity-60" id="cursor-halo" style="left: 704px; top: 3645px;"></div>
+<!-- Rising Subtle Bubbles Ambient Layer -->
+<div aria-hidden="true" class="fixed inset-0 pointer-events-none z-10 overflow-hidden">
+<div class="bubble w-3 h-3 left-[8%]" style="animation-duration: 18s; animation-delay: 1s;"></div>
+<div class="bubble w-2 h-2 left-[28%]" style="animation-duration: 22s; animation-delay: 5s;"></div>
+<div class="bubble w-4 h-4 left-[64%]" style="animation-duration: 25s; animation-delay: 2s;"></div>
+<div class="bubble w-2.5 h-2.5 left-[88%]" style="animation-duration: 19s; animation-delay: 7s;"></div>
+</div>
+<!-- Audio Toast Notification -->
+<div aria-live="polite" class="fixed top-24 right-6 z-50 transform translate-y-4 opacity-0 pointer-events-none transition-all duration-300 glass-card px-4 py-2.5 rounded-lg border-aqua/30 text-xs font-sans text-pearl flex items-center gap-2 shadow-glow-aqua" id="audio-toast" role="status">
+<span class="w-2 h-2 rounded-full bg-aqua animate-ping"></span>
+<span id="audio-toast-msg" class="">Atmospheric hydrophone soundscape activated</span>
+</div>
+<!-- BEGIN: Vertical Depth Descent HUD -->
+<aside class="hidden md:flex fixed right-6 top-1/2 -translate-y-1/2 z-40 flex-col items-center gap-6 glass-card py-5 px-3 rounded-full border-aqua/20 shadow-2xl backdrop-blur-xl" data-purpose="depth-hud">
+<div class="text-[10px] tracking-widest font-mono text-aqua/60 -rotate-90 uppercase">Depth</div>
+<div class="w-px h-10 bg-gradient-to-b from-transparent via-aqua/40 to-aqua/40"></div>
+<!-- Depth Nav Nodes -->
+<nav aria-label="Ocean Depth Navigation" class="flex flex-col gap-5 items-center">
+<button aria-label="Scroll to 0M Surface" class="depth-node group relative flex items-center justify-center p-1" data-depth-target="hero">
+<span class="w-2.5 h-2.5 rounded-full border border-aqua transition-all duration-300 group-hover:scale-125 group-hover:bg-aqua"></span>
+<span class="absolute right-7 font-mono text-[11px] whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-200 bg-surface-lowest/90 px-2 py-0.5 rounded border border-aqua/30 text-aqua">0M — Surface Entry</span>
+</button>
+<button aria-label="Scroll to 10M Sunlight Observatory" class="depth-node group relative flex items-center justify-center p-1" data-depth-target="experience">
+<span class="w-2.5 h-2.5 rounded-full border border-aqua transition-all duration-300 group-hover:scale-125 group-hover:bg-aqua"></span>
+<span class="absolute right-7 font-mono text-[11px] whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-200 bg-surface-lowest/90 px-2 py-0.5 rounded border border-aqua/30 text-aqua">10M — Sunlight Alcoves</span>
+</button>
+<button aria-label="Scroll to 20M Twilight Gastronomy" class="depth-node group relative flex items-center justify-center p-1" data-depth-target="menu">
+<span class="w-2.5 h-2.5 rounded-full border border-aqua transition-all duration-300 group-hover:scale-125 group-hover:bg-aqua"></span>
+<span class="absolute right-7 font-mono text-[11px] whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-200 bg-surface-lowest/90 px-2 py-0.5 rounded border border-aqua/30 text-aqua">20M — Twilight Tasting</span>
+</button>
+<button aria-label="Scroll to 30M Abyssal Lounge" class="depth-node group relative flex items-center justify-center p-1" data-depth-target="the-deep-bar">
+<span class="w-2.5 h-2.5 rounded-full border border-aqua transition-all duration-300 group-hover:scale-125 group-hover:bg-aqua"></span>
+<span class="absolute right-7 font-mono text-[11px] whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-200 bg-surface-lowest/90 px-2 py-0.5 rounded border border-aqua/30 text-aqua">30M — Abyssal Lounge</span>
+</button>
+</nav>
+<div class="w-px h-10 bg-gradient-to-t from-transparent via-aqua/40 to-aqua/40"></div>
+<span class="font-mono text-[11px] text-aqua tracking-tighter" id="hud-current-depth">0M</span>
+</aside>
+<!-- END: Vertical Depth Descent HUD -->
+<!-- BEGIN: MainHeader (Floating Organic Wavy Oceanic Navigation Bar) -->
+<header class="fixed top-3 sm:top-5 left-0 right-0 z-50 px-4 sm:px-6 pointer-events-none transition-all duration-500" data-purpose="site-header">
+<div class="max-w-7xl mx-auto wavy-nav-container pointer-events-auto">
+<div class="wavy-nav-capsule px-5 sm:px-8 py-3 sm:py-3.5 flex items-center justify-between relative overflow-hidden">
+<!-- Subtle Oceanic Wave Shimmer SVG Background Accent -->
+<svg aria-hidden="true" class="absolute -bottom-2 left-0 right-0 w-full h-4 opacity-25 pointer-events-none text-aqua fill-none stroke-current" preserveAspectRatio="none" viewBox="0 0 1200 24">
+<path d="M0,12 C150,22 350,2 600,12 C850,22 1050,2 1200,12" stroke-dasharray="6 8" stroke-width="1.2"></path>
+</svg>
+<!-- Brand Logo -->
+<a aria-label="ABYSSÉ Home" class="flex items-center gap-3 group relative z-10" href="#hero">
+<div class="relative flex items-center justify-center w-9 h-9 rounded-full border border-aqua/40 group-hover:border-aqua transition-colors duration-300 bg-surface-lowest/50">
+<div class="w-2.5 h-2.5 rounded-full bg-aqua group-hover:scale-125 transition-transform duration-300 shadow-glow-aqua"></div>
+</div>
+<div class="flex flex-col">
+<span class="font-serif tracking-[0.28em] text-lg font-bold text-pearl-pure group-hover:text-aqua transition-colors">ABYSSÉ</span>
+<span class="text-[9px] uppercase tracking-[0.35em] text-pearl-dim font-mono -mt-0.5">Café Beneath The Blue</span>
+</div>
+</a>
+<!-- Desktop Primary Nav Links -->
+<nav aria-label="Main Navigation" class="hidden lg:flex items-center gap-7 text-xs uppercase tracking-[0.2em] font-medium relative z-10" data-purpose="desktop-nav">
+<a class="nav-link text-pearl-dim hover:text-aqua transition-colors py-1 relative" href="#experience">Experience</a>
+<a class="nav-link text-pearl-dim hover:text-aqua transition-colors py-1 relative" href="#menu">Taste The Tide</a>
+<a class="nav-link text-pearl-dim hover:text-aqua transition-colors py-1 relative" href="#ambience">Ambience</a>
+<a class="nav-link text-pearl-dim hover:text-aqua transition-colors py-1 relative" href="#the-deep-bar">The Deep Bar</a>
+<a class="nav-link text-pearl-dim hover:text-aqua transition-colors py-1 relative" href="#location">Stratum</a><a class="nav-link text-pearl-dim hover:text-aqua transition-colors py-1 relative" href="#reviews">Acclaim</a>
+</nav>
+<!-- Action Utilities: Oceanic Soundscape + Reservation CTA -->
+<div class="flex items-center gap-3 sm:gap-4 relative z-10">
+<!-- Oceanic Soundscape Ambient Audio Toggle -->
+<button aria-label="Toggle oceanic soundscape audio" aria-pressed="false" class="flex items-center gap-2 px-3 py-1.5 rounded-full border border-aqua/30 text-pearl-dim hover:text-aqua hover:border-aqua transition-all duration-300 bg-surface-lowest/40 backdrop-blur-md" data-purpose="audio-controller" id="soundscape-toggle">
+<div aria-hidden="true" class="flex items-end gap-0.5 h-4 w-3.5" id="eq-container">
+<span class="eq-bar w-0.5 bg-aqua h-1"></span>
+<span class="eq-bar w-0.5 bg-aqua h-1"></span>
+<span class="eq-bar w-0.5 bg-aqua h-1"></span>
+<span class="eq-bar w-0.5 bg-aqua h-1"></span>
+</div>
+<span class="text-[10px] tracking-widest uppercase font-mono hidden sm:inline" id="soundscape-label">Abyss Audio: Off</span>
+</button>
+<!-- Reserve CTA Button -->
+<a class="hidden sm:inline-flex items-center justify-center px-5 py-2 rounded-full text-xs font-semibold uppercase tracking-widest text-surface-lowest bg-aqua hover:bg-white hover:shadow-glow-aqua transition-all duration-300 transform active:scale-95 shadow-sm" href="#reservation">
+          Reserve Table
+        </a>
+<!-- Mobile Menu Trigger -->
+<button aria-controls="mobile-drawer" aria-expanded="false" aria-label="Open mobile navigation" class="lg:hidden p-2 text-pearl hover:text-aqua transition-colors" id="mobile-menu-open">
+<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+<path d="M4 6h16M4 12h16M4 18h16" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"></path>
+</svg>
+</button>
+</div>
+</div>
+</div>
+</header>
+<!-- END: MainHeader -->
+<!-- BEGIN: Mobile Navigation Drawer -->
+<div aria-hidden="true" class="fixed inset-0 z-50 bg-surface-lowest/95 backdrop-blur-2xl transition-transform duration-300 translate-x-full lg:hidden flex flex-col justify-between p-8" id="mobile-drawer">
+<div class="flex items-center justify-between border-b border-aqua/15 pb-6">
+<div class="flex items-center gap-2.5">
+<span class="w-3 h-3 rounded-full bg-aqua shadow-glow-aqua"></span>
+<span class="font-serif tracking-[0.25em] text-lg font-bold text-pearl-pure">ABYSSÉ</span>
+</div>
+<button aria-label="Close mobile menu" class="p-2 text-pearl hover:text-aqua" id="mobile-menu-close">
+<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+<path d="M6 18L18 6M6 6l12 12" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"></path>
+</svg>
+</button>
+</div>
+<nav class="flex flex-col gap-6 text-base tracking-[0.2em] uppercase font-serif text-center my-auto">
+<a class="mobile-nav-link text-pearl hover:text-aqua transition-colors py-2" href="#experience">Experience</a>
+<a class="mobile-nav-link text-pearl hover:text-aqua transition-colors py-2" href="#menu">Taste The Tide</a>
+<a class="mobile-nav-link text-pearl hover:text-aqua transition-colors py-2" href="#ambience">Ambience Mosaic</a>
+<a class="mobile-nav-link text-pearl hover:text-aqua transition-colors py-2" href="#the-deep-bar">The Deep Bar</a>
+<a class="mobile-nav-link text-pearl hover:text-aqua transition-colors py-2" href="#location">Location &amp; Stratum</a>
+<a class="mobile-nav-link text-aqua font-bold py-3 mt-4 border border-aqua/30 rounded-full" href="#reservation">Reserve Descent</a>
+</nav>
+<div class="text-center text-xs font-mono text-pearl-dim/60 pt-6 border-t border-aqua/10">
+      30 METERS UNDERWATER • MALDIVES ATOLL
+    </div>
+</div>
+<!-- END: Mobile Navigation Drawer -->
+<main>
+<!-- BEGIN: HeroSection -->
+<section class="relative min-h-screen flex items-center justify-center pt-28 pb-16 px-6 overflow-hidden" data-purpose="hero-viewport" id="hero" style="background: radial-gradient(100% 75% at 50% 0%, rgba(95, 243, 236, 0.32) 0%, rgba(18, 114, 158, 0.5) 45%, rgba(8, 55, 83, 0.98) 100%), linear-gradient(rgb(16, 102, 144) 0%, rgb(12, 77, 112) 45%, rgb(8, 55, 83) 100%);">
+<!-- Panoramic Underwater Background Image with Caustic Overlay -->
+<div class="absolute inset-0 z-0">
+<img alt="Panoramic curved glass underwater dining hall with manta rays and coral reef" class="w-full h-full object-cover object-center scale-105 transform motion-safe:animate-float brightness-[0.82] contrast-105" src="https://lh3.googleusercontent.com/aida/AEtjO1UnsysO0Qf5Adm5WgsjrzT4xJOyKiztkT0PzUQVttB0kpJWWZfiOM5NLFm60Uc1rGUvCnJzdMbyki6Wq8a4Mr7GWRtvtTrJXmH0TBEwLTDAAigthNlWJcqYRxcACYuvtMq0GgTO-midPBM5IVLAWu6-ZE7d7wol-Qw02hw5HBTPwSnsE23fqAeBjLxh52_vvjXIHYhdfyYzKbbMpeCd_N_pOkL7sq15nbb-IS1pl2YdQLPx2_2kUpaDZxA">
+<!-- Deep ocean atmospheric gradient overlays -->
+<div class="absolute inset-0 bg-gradient-to-t from-surface-lowest via-surface/40 to-surface-lowest/70 mix-blend-multiply"></div>
+<div class="absolute inset-0 bg-gradient-to-r from-surface-lowest/90 via-transparent to-surface-lowest/70"></div>
+<div class="absolute inset-0 bg-aqua/5 mix-blend-color"></div>
+<!-- Sunlit Surface Shimmer & Caustic Light Shafts (0M Epipelagic) -->
+<div class="absolute inset-0 pointer-events-none overflow-hidden z-10">
+  <!-- Diagonal Sunbeams radiating from surface -->
+  <div class="absolute -top-10 left-1/4 w-72 h-[120vh] bg-gradient-to-b from-white/25 via-aqua/15 to-transparent blur-2xl transform -rotate-12 anim-sunrays"></div>
+  <div class="absolute -top-16 left-1/2 w-96 h-[110vh] bg-gradient-to-b from-white/20 via-aqua/10 to-transparent blur-3xl transform -rotate-6 anim-sunrays" style="animation-delay: 2.5s;"></div>
+  <div class="absolute -top-10 right-1/4 w-80 h-[100vh] bg-gradient-to-b from-white/18 via-aqua/12 to-transparent blur-2xl transform rotate-6 anim-sunrays" style="animation-delay: 4.5s;"></div>
+</div>
+
+<!-- 0M Epipelagic Marine Fauna: Swimming Green Sea Turtle & Silver Schooling Mackerel -->
+<div class="absolute inset-0 pointer-events-none overflow-hidden z-10">
+  <!-- Green Sea Turtle (Chelonia mydas) drifting in sunbeams -->
+  <div class="absolute top-28 left-[6%] sm:left-[12%] opacity-60 anim-manta" style="animation-duration: 14s;">
+    <svg width="120" height="95" viewBox="0 0 120 95" fill="none" class="text-pearl-pure/80 drop-shadow-[0_4px_12px_rgba(56,214,208,0.4)]">
+      <path d="M60 22 C72 22 84 32 86 48 C88 64 74 76 60 76 C46 76 32 64 34 48 C36 32 48 22 60 22 Z" fill="currentColor" fill-opacity="0.35" stroke="#38d6d0" stroke-width="1.4"></path>
+      <!-- Carapace Scoots -->
+      <path d="M60 30 L68 44 L60 58 L52 44 Z M68 44 L80 46 M52 44 L40 46 M60 58 L60 72" stroke="#38d6d0" stroke-width="0.9" stroke-dasharray="2 2"></path>
+      <!-- Head -->
+      <ellipse cx="60" cy="14" rx="7" ry="9" fill="currentColor" fill-opacity="0.4" stroke="#38d6d0" stroke-width="1.2"></ellipse>
+      <!-- Front Flippers -->
+      <path d="M42 36 C24 28 8 32 4 40 C14 46 32 44 40 42 Z" fill="currentColor" fill-opacity="0.3" stroke="#38d6d0" stroke-width="1.2"></path>
+      <path d="M78 36 C96 28 112 32 116 40 C106 46 88 44 80 42 Z" fill="currentColor" fill-opacity="0.3" stroke="#38d6d0" stroke-width="1.2"></path>
+      <!-- Rear Flippers & Tail -->
+      <path d="M48 70 C38 78 36 86 40 90 C46 88 50 80 52 74 Z" fill="currentColor" fill-opacity="0.3" stroke="#38d6d0" stroke-width="1"></path>
+      <path d="M72 70 C82 78 84 86 80 90 C74 88 70 80 68 74 Z" fill="currentColor" fill-opacity="0.3" stroke="#38d6d0" stroke-width="1"></path>
+      <path d="M60 76 L60 84" stroke="#38d6d0" stroke-width="1.4" stroke-linecap="round"></path>
+    </svg>
+    <span class="block font-mono text-[9px] tracking-widest text-pearl-pure/70 uppercase mt-1 text-center bg-surface-lowest/60 px-2 py-0.5 rounded-full border border-aqua/30">0M · Chelonia mydas</span>
+  </div>
+
+  <!-- Darting Silver Mackerel / Flying Fish School (Right Flank) -->
+  <div class="absolute top-44 right-[8%] sm:right-[15%] opacity-70 anim-school" style="animation-duration: 9s;">
+    <svg width="160" height="80" viewBox="0 0 160 80" fill="none">
+      <!-- Fish 1 -->
+      <path d="M10 25 C25 20 40 22 50 26 C42 22 46 16 54 18 C50 25 44 29 35 30 C20 31 10 25 10 25 Z" fill="#cfe5fb" fill-opacity="0.7" stroke="#5ff3ec" stroke-width="0.8"></path>
+      <!-- Fish 2 -->
+      <path d="M45 42 C60 37 75 39 85 43 C77 39 81 33 89 35 C85 42 79 46 70 47 C55 48 45 42 45 42 Z" fill="#cfe5fb" fill-opacity="0.8" stroke="#5ff3ec" stroke-width="0.8"></path>
+      <!-- Fish 3 -->
+      <path d="M80 18 C95 13 110 15 120 19 C112 15 116 9 124 11 C120 18 114 22 105 23 C90 24 80 18 80 18 Z" fill="#cfe5fb" fill-opacity="0.6" stroke="#5ff3ec" stroke-width="0.8"></path>
+      <!-- Fish 4 -->
+      <path d="M110 50 C125 45 140 47 150 51 C142 47 146 41 154 43 C150 50 144 54 135 55 C120 56 110 50 110 50 Z" fill="#cfe5fb" fill-opacity="0.7" stroke="#5ff3ec" stroke-width="0.8"></path>
+    </svg>
+    <span class="block font-mono text-[8px] tracking-widest text-pearl-pure/70 uppercase text-right">Schooling Mackerel &amp; Flying Fish · 0M</span>
+  </div>
+</div></div>
+<!-- ============================================================ -->
+<!-- SIGNATURE BIOLUMINESCENT JELLYFISH IN HERO -->
+<!-- ============================================================ -->
+<div class="absolute right-4 sm:right-10 lg:right-[9%] top-[22%] sm:top-[20%] lg:top-[23%] z-30 pointer-events-none select-none transition-transform duration-300 will-change-transform" id="jellyfish-anchor">
+<div class="relative pointer-events-auto cursor-pointer group" id="jellyfish-physics" style="width: 250px; height: 350px; transform: translate3d(-4.46591px, -4.88684px, 0px);" title="Click to descend directly to Table Reservation">
+<!-- Shockwave Ripple Container (spawns dynamically on click/tap) -->
+<div class="absolute inset-0 pointer-events-none overflow-visible" id="jelly-ripple-stage"></div>
+<!-- Micro plankton sparkle particles layer -->
+<div class="absolute inset-0 pointer-events-none overflow-visible" id="jelly-sparkle-layer"></div>
+<!-- Main Creature Visual Assembly -->
+<div class="relative w-full h-full flex flex-col items-center jelly-swim transition-all duration-500 ease-out" id="jelly-body">
+<!-- Volumetric Ambient Glow Backdrops -->
+<div class="absolute -top-10 w-44 h-44 rounded-full bg-aqua/30 blur-3xl pointer-events-none transition-opacity duration-500 opacity-60 group-hover:opacity-90" id="jelly-back-glow"></div>
+<div class="absolute -top-6 w-36 h-36 rounded-full bg-purple-600/25 blur-2xl pointer-events-none"></div>
+<!-- SVG Creature: Bell, Translucent Membranes & Flowing Tentacles -->
+<svg class="w-full h-full drop-shadow-[0_10px_28px_rgba(56,214,208,0.45)]" fill="none" viewBox="0 0 250 350" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<!-- Bell Translucent Gradient -->
+<linearGradient gradientUnits="userSpaceOnUse" id="bellOuterGrad" x1="125" x2="125" y1="20" y2="155">
+<stop offset="0%" stop-color="#ffffff" stop-opacity="0.85"></stop>
+<stop offset="25%" stop-color="#79d4e2" stop-opacity="0.55"></stop>
+<stop offset="60%" stop-color="#38d6d0" stop-opacity="0.25"></stop>
+<stop offset="100%" stop-color="#9333ea" stop-opacity="0.38"></stop>
+</linearGradient>
+<!-- Iridescent Rim Glow -->
+<linearGradient gradientUnits="userSpaceOnUse" id="rimGlowGrad" x1="40" x2="210" y1="140" y2="140">
+<stop offset="0%" stop-color="#38d6d0" stop-opacity="0.9"></stop>
+<stop offset="50%" stop-color="#cfe5fb" stop-opacity="0.95"></stop>
+<stop offset="100%" stop-color="#40dbd5" stop-opacity="0.9"></stop>
+</linearGradient>
+<!-- Inner Bioluminescent Core Gradient -->
+<radialGradient cx="50%" cy="40%" id="innerCoreGrad" r="50%">
+<stop offset="0%" stop-color="#ffffff" stop-opacity="1"></stop>
+<stop offset="35%" stop-color="#40dbd5" stop-opacity="0.8"></stop>
+<stop offset="75%" stop-color="#9333ea" stop-opacity="0.45"></stop>
+<stop offset="100%" stop-color="#001524" stop-opacity="0"></stop>
+</radialGradient>
+<!-- Tentacle Aqua Fade -->
+<linearGradient id="tentacleAqua" x1="0" x2="0" y1="0" y2="1">
+<stop offset="0%" stop-color="#5ff3ec" stop-opacity="0.85"></stop>
+<stop offset="45%" stop-color="#38d6d0" stop-opacity="0.4"></stop>
+<stop offset="90%" stop-color="#cfe5fb" stop-opacity="0.15"></stop>
+<stop offset="100%" stop-color="#38d6d0" stop-opacity="0"></stop>
+</linearGradient>
+<!-- Oral Arms Soft Lavender Fade -->
+<linearGradient id="oralArmGrad" x1="0" x2="0" y1="0" y2="1">
+<stop offset="0%" stop-color="#ffffff" stop-opacity="0.75"></stop>
+<stop offset="30%" stop-color="#c4b5fd" stop-opacity="0.5"></stop>
+<stop offset="70%" stop-color="#38d6d0" stop-opacity="0.3"></stop>
+<stop offset="100%" stop-color="#9333ea" stop-opacity="0"></stop>
+</linearGradient>
+<filter height="160%" id="creatureGlow" width="160%" x="-30%" y="-30%">
+<feGaussianBlur in="SourceGraphic" result="blur1" stdDeviation="4"></feGaussianBlur>
+<feGaussianBlur in="SourceGraphic" result="blur2" stdDeviation="1.5"></feGaussianBlur>
+<feMerge>
+<feMergeNode in="blur1"></feMergeNode>
+<feMergeNode in="blur2"></feMergeNode>
+<feMergeNode in="SourceGraphic"></feMergeNode>
+</feMerge>
+</filter>
+</defs>
+<!-- Inner Bioluminescent Core Organ -->
+<g class="jelly-core-glow">
+<ellipse cx="125" cy="88" fill="url(#innerCoreGrad)" rx="34" ry="26"></ellipse>
+<circle cx="125" cy="85" fill="#ffffff" filter="url(#creatureGlow)" opacity="0.9" r="9"></circle>
+<!-- Radial rhopalia points (sensory organs around bell) -->
+<circle cx="95" cy="100" fill="#5ff3ec" r="2"></circle>
+<circle cx="155" cy="100" fill="#5ff3ec" r="2"></circle>
+<circle cx="125" cy="115" fill="#ffffff" r="2.5"></circle>
+</g>
+<!-- Oral Arms (Silky Ruffled Central Membranes) -->
+<g class="sway-3" opacity="0.85">
+<!-- Oral arm 1 (left ruffled) -->
+<path d="M112 135 C105 165, 88 190, 102 225 C112 250, 95 275, 106 315 C108 322, 114 322, 112 315 C99 275, 118 250, 108 225 C96 195, 118 165, 118 135 Z" fill="url(#oralArmGrad)"></path>
+<!-- Oral arm 2 (right ruffled) -->
+<path d="M138 135 C145 165, 162 190, 148 225 C138 250, 155 275, 144 315 C142 322, 136 322, 138 315 C151 275, 132 250, 142 225 C154 195, 132 165, 132 135 Z" fill="url(#oralArmGrad)"></path>
+<!-- Central trailing ribbon -->
+<path d="M125 138 Q120 185, 130 230 T123 330" fill="none" opacity="0.75" stroke="url(#tentacleAqua)" stroke-linecap="round" stroke-width="1.8"></path>
+</g>
+<!-- Filament Tentacles (Sinusoidal swaying paths) -->
+<g class="sway-1">
+<path d="M72 140 C65 180, 52 220, 68 265 C80 300, 58 330, 64 348" fill="none" opacity="0.6" stroke="url(#tentacleAqua)" stroke-linecap="round" stroke-width="1.2"></path>
+<path d="M96 142 C92 185, 82 225, 94 270 C102 305, 88 335, 92 350" fill="none" opacity="0.75" stroke="url(#tentacleAqua)" stroke-linecap="round" stroke-width="1.4"></path>
+<path d="M118 143 C116 190, 110 230, 118 280 C122 310, 114 338, 116 352" fill="none" opacity="0.8" stroke="url(#tentacleAqua)" stroke-linecap="round" stroke-width="1.5"></path>
+</g>
+<g class="sway-2">
+<path d="M132 143 C134 190, 140 230, 132 280 C128 310, 136 338, 134 352" fill="none" opacity="0.8" stroke="url(#tentacleAqua)" stroke-linecap="round" stroke-width="1.5"></path>
+<path d="M154 142 C158 185, 168 225, 156 270 C148 305, 162 335, 158 350" fill="none" opacity="0.75" stroke="url(#tentacleAqua)" stroke-linecap="round" stroke-width="1.4"></path>
+<path d="M178 140 C185 180, 198 220, 182 265 C170 300, 192 330, 186 348" fill="none" opacity="0.6" stroke="url(#tentacleAqua)" stroke-linecap="round" stroke-width="1.2"></path>
+</g>
+<!-- Outer Translucent Bell (Parachute Dome) -->
+<g id="jelly-bell-mesh">
+<!-- Backside shaded rim -->
+<ellipse cx="125" cy="140" fill="#0c273a" opacity="0.4" rx="72" ry="12"></ellipse>
+<!-- Main Dome Membrane -->
+<path d="M53 140 C50 78, 80 25, 125 25 C170 25, 200 78, 197 140 C182 147, 168 143, 155 142 C142 141, 132 144, 125 144 C118 144, 108 141, 95 142 C82 143, 68 147, 53 140 Z" fill="url(#bellOuterGrad)" stroke="url(#rimGlowGrad)" stroke-width="1.2" style="backdrop-filter: blur(4px);"></path>
+<!-- Inner Curvature Striae / Radial Ribs -->
+<path d="M125 26 Q125 80, 125 144" opacity="0.5" stroke="#5ff3ec" stroke-dasharray="2 3" stroke-width="0.8"></path>
+<path d="M125 26 Q100 80, 85 141" opacity="0.4" stroke="#5ff3ec" stroke-dasharray="2 3" stroke-width="0.7"></path>
+<path d="M125 26 Q150 80, 165 141" opacity="0.4" stroke="#5ff3ec" stroke-dasharray="2 3" stroke-width="0.7"></path>
+<path d="M125 26 Q75 85, 62 138" opacity="0.3" stroke="#5ff3ec" stroke-dasharray="2 4" stroke-width="0.5"></path>
+<path d="M125 26 Q175 85, 188 138" opacity="0.3" stroke="#5ff3ec" stroke-dasharray="2 4" stroke-width="0.5"></path>
+<!-- Luminous Scalloped Margin / Velarium rim -->
+<path d="M53 140 Q62 147, 72 141 Q82 148, 93 142 Q105 149, 116 143 Q125 148, 134 143 Q145 149, 157 142 Q168 148, 178 141 Q188 147, 197 140" fill="none" filter="url(#creatureGlow)" stroke="url(#rimGlowGrad)" stroke-width="2.2"></path>
+</g>
+</svg>
+</div>
+<!-- Floating Minimal Glassmorphic Proximity Badge -->
+<div class="absolute -bottom-4 left-1/2 -translate-x-1/2 whitespace-nowrap px-3.5 py-1.5 rounded-full glass-card border-aqua/30 shadow-glow-aqua transition-all duration-300 pointer-events-auto flex items-center gap-2 group-hover:border-aqua group-hover:scale-105" id="jelly-badge">
+<span class="w-1.5 h-1.5 rounded-full bg-aqua animate-ping"></span>
+<span class="font-mono text-[9px] uppercase tracking-[0.25em] text-pearl group-hover:text-aqua transition-colors" id="jelly-badge-text">Click To Descend</span>
+</div>
+<!-- The Memorable Revealed Card ("Direct Descent to Reservation") -->
+<div class="absolute top-[108%] left-1/2 -translate-x-1/2 w-64 p-4 rounded-2xl glass-card border-aqua/40 shadow-2xl backdrop-blur-2xl opacity-0 translate-y-3 pointer-events-none transition-all duration-500 z-50 text-center" id="jelly-reveal-card">
+<div class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-aqua/20 border border-aqua/40 text-[9px] font-mono uppercase tracking-widest text-aqua mb-2">
+<span class="">Deep Pelagic Guide</span>
+</div>
+<p class="font-serif text-pearl-pure text-base italic leading-snug">"Follow the light."</p>
+<p class="text-xs text-pearl-dim/90 font-sans mt-1 mb-3">Your benthic table awaits 30 meters beneath.</p>
+<a class="inline-flex items-center justify-center gap-2 w-full py-2.5 rounded-full bg-aqua text-surface-lowest text-[11px] font-semibold uppercase tracking-widest hover:bg-white hover:shadow-glow-aqua transition-all" href="#reservation" id="jelly-descend-cta">
+<span class="">RESERVE YOUR DESCENT ↓</span>
+</a>
+</div>
+</div>
+</div>
+<!-- ============================================================ -->
+<!-- Hero Copy and Floating Focal Capsule -->
+<div class="relative z-20 max-w-5xl mx-auto text-center flex flex-col items-center">
+<!-- Subtitle & Depth Indicator Tag -->
+<div class="inline-flex items-center gap-3 px-4 py-1.5 rounded-full border border-aqua/40 bg-surface-low/70 backdrop-blur-md mb-8 animate-fade-in shadow-glow-aqua"><span class="w-2 h-2 rounded-full bg-aqua animate-ping"></span>
+<span class="text-xs uppercase font-mono tracking-[0.25em] text-pearl-pure">STRATUM 01 · EPIPELAGIC 0M — SUNLIGHT SURFACE &amp; PELAGIC REEF</span>
+<span class="text-[10px] font-mono text-aqua/90 hidden sm:inline">• 100% PAR SOLAR PENETRATION</span></div>
+<h1 class="font-serif text-4xl sm:text-6xl md:text-7xl lg:text-8xl tracking-tight leading-[1.08] text-pearl-pure mb-6 max-w-4xl drop-shadow-2xl">
+          Where Ocean Depths Meet <span class="italic font-normal text-transparent bg-clip-text bg-gradient-to-r from-aqua via-pearl to-coral">Culinary Wonder</span>
+</h1>
+<p class="max-w-2xl font-sans font-normal text-base sm:text-lg text-pearl-dim tracking-wide leading-relaxed mb-10 text-balance">
+          Descend into a world sculpted by tidal currents and luminous glass. ABYSSÉ offers an intimate high-gastronomy sanctuary surrounded by pelagic life, organic architecture, and bespoke twilight cocktails.
+        </p>
+<!-- CTA Action Hub -->
+<div class="flex flex-col sm:flex-row items-center gap-4 w-full justify-center max-w-md">
+<a class="w-full sm:w-auto px-8 py-4 rounded-full bg-aqua text-surface-lowest font-semibold uppercase tracking-widest text-xs hover:bg-pearl-pure hover:shadow-glow-aqua-lg transition-all duration-300 text-center" href="#reservation">
+            Book an Oceanic Table
+          </a>
+<a class="w-full sm:w-auto px-8 py-4 rounded-full border border-pearl/30 hover:border-aqua text-pearl font-medium uppercase tracking-widest text-xs glass-card hover:text-aqua transition-all duration-300 text-center" href="#experience">
+            Discover Experience
+          </a>
+</div>
+<!-- Metric Stat Badges -->
+<div class="grid grid-cols-3 gap-6 sm:gap-12 mt-16 pt-8 border-t border-aqua/20 max-w-2xl w-full">
+<div>
+<div class="font-serif text-2xl sm:text-3xl text-pearl-pure font-bold">30m</div>
+<div class="font-mono text-[10px] sm:text-xs uppercase tracking-wider text-pearl-dim">Benthic Depth</div>
+</div>
+<div>
+<div class="font-serif text-2xl sm:text-3xl text-aqua font-bold">180°</div>
+<div class="font-mono text-[10px] sm:text-xs uppercase tracking-wider text-pearl-dim">Panoramic Acrylic</div>
+</div>
+<div>
+<div class="font-serif text-2xl sm:text-3xl text-coral font-bold">14</div>
+<div class="font-mono text-[10px] sm:text-xs uppercase tracking-wider text-pearl-dim">Exclusive Booths</div>
+</div>
+</div>
+</div>
+<!-- Bottom Scroll Hint -->
+<a aria-label="Scroll to next section" class="absolute bottom-6 left-1/2 -translate-x-1/2 text-pearl/50 hover:text-aqua transition-colors flex flex-col items-center gap-2 z-20" href="#experience">
+<span class="text-[9px] uppercase tracking-[0.3em] font-mono">Descend</span>
+<svg class="w-4 h-4 animate-bounce text-aqua" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+<path d="M19 14l-7 7m0 0l-7-7m7 7V3" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</a>
+</section>
+<!-- END: HeroSection -->
+<!-- BEGIN: ExperienceSection -->
+<section class="relative py-28 px-6 border-t border-aqua/10 bg-surface-lowest" data-purpose="experience-story" id="experience" style="background: linear-gradient(rgb(8, 55, 83) 0%, rgb(6, 47, 72) 50%, rgb(5, 39, 62) 100%);">
+<div class="max-w-7xl mx-auto"><!-- 10M Upper Reef Marine Fauna: Giant Pelagic Manta Ray & Blacktip Reef Shark -->
+<div class="w-full flex items-center justify-between mb-8 pb-4 border-b border-aqua/20 flex-wrap gap-4">
+  <div class="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-surface-lowest/70 backdrop-blur-md border border-aqua/30 text-xs font-mono text-pearl shadow-glow-aqua">
+    <span class="w-2 h-2 rounded-full bg-aqua animate-pulse"></span>
+    <span class="uppercase tracking-widest text-pearl-pure font-bold">STRATUM 02 · 10M SUNLIGHT SANCTUARY</span>
+    <span class="text-aqua/80">— MOBULA BIROSTRIS &amp; CARCHARHINUS MELANOPTERUS</span>
+  </div>
+  <div class="flex items-center gap-6 text-[11px] font-mono text-pearl-dim">
+    <span class="flex items-center gap-1.5"><span class="text-aqua">✦</span> Oceanic Visibility: 42m</span>
+    <span class="flex items-center gap-1.5"><span class="text-coral">✦</span> Water Temp: 28.4°C</span>
+  </div>
+</div>
+
+<!-- Drifting Oceanic Manta Ray Silhouette Background Art -->
+<div class="relative w-full pointer-events-none mb-6 overflow-hidden flex justify-end pr-4">
+  <div class="anim-manta opacity-50 flex items-center gap-3">
+    <svg width="180" height="80" viewBox="0 0 180 80" fill="none" class="text-aqua/70 drop-shadow-[0_0_15px_rgba(56,214,208,0.3)]">
+      <!-- Cephalic Fins / Horns -->
+      <path d="M28 38 Q22 30 20 22 Q26 26 34 32" stroke="#38d6d0" stroke-width="1.4" fill="none"></path>
+      <path d="M28 42 Q22 50 20 58 Q26 54 34 48" stroke="#38d6d0" stroke-width="1.4" fill="none"></path>
+      <!-- Wing Body -->
+      <path d="M34 32 C60 18 100 2 135 15 C118 28 95 38 105 40 C95 42 118 52 135 65 C100 78 60 62 34 48 Z" fill="currentColor" fill-opacity="0.2" stroke="#38d6d0" stroke-width="1.4"></path>
+      <!-- Tail -->
+      <path d="M105 40 C130 40 160 41 178 40" stroke="#5ff3ec" stroke-width="1.2" stroke-linecap="round"></path>
+      <!-- Dorsal Markings -->
+      <path d="M58 36 Q75 32 90 38 M58 44 Q75 48 90 42" stroke="#cfe5fb" stroke-width="1" stroke-opacity="0.6" stroke-dasharray="3 3"></path>
+    </svg>
+    <span class="font-mono text-[9px] tracking-widest text-pearl-dim uppercase">Mobula birostris · Pelagic Manta Ray</span>
+  </div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+<!-- Image Column with Gallery Lightbox Trigger -->
+<div class="lg:col-span-7 relative group">
+<div class="relative overflow-hidden rounded-2xl border border-aqua/25 shadow-2xl glass-card">
+<img alt="Intimate private dining booth inside underwater ocean observatory with sea anemone brass lamp" class="w-full h-[480px] sm:h-[580px] object-cover transition-transform duration-700 group-hover:scale-105 cursor-pointer" data-lightbox-caption="Private ocean-view booth surrounded by schools of trevally, featuring curved deep navy velvet seating and hand-crafted brass bioluminescent table fixtures." data-lightbox-src="https://lh3.googleusercontent.com/aida/AEtjO1XC8xxeaIN-0mu8L-GgGgJx4S7JaqzGl_UHhtxZUdPqXBxgsvcbH5qSOAuyNpiPxvAD_jLXZXOoUY60wQEDrzXDanwgo3T_F7HMXpcRhWp-yX-nr5HI1zk3ncdxqPgq7UmGqw-sN4ClwkGbHkh1lJ-wIfO-uRKm1jiVwbx8aF8v3iT1uiFnaQBMgirRYowFLKXMEImRuCsYWyX4eBVdJxL_tgWBE_tTcNj_GJpWASB3W1Ot1xmeRIkeaQJa" data-lightbox-title="Anemone Alcove Sanctuary" src="https://lh3.googleusercontent.com/aida/AEtjO1XC8xxeaIN-0mu8L-GgGgJx4S7JaqzGl_UHhtxZUdPqXBxgsvcbH5qSOAuyNpiPxvAD_jLXZXOoUY60wQEDrzXDanwgo3T_F7HMXpcRhWp-yX-nr5HI1zk3ncdxqPgq7UmGqw-sN4ClwkGbHkh1lJ-wIfO-uRKm1jiVwbx8aF8v3iT1uiFnaQBMgirRYowFLKXMEImRuCsYWyX4eBVdJxL_tgWBE_tTcNj_GJpWASB3W1Ot1xmeRIkeaQJa">
+<div class="absolute inset-0 bg-gradient-to-t from-surface-lowest via-transparent to-transparent opacity-60"></div>
+<!-- Zoom Indicator Badge -->
+<button aria-label="View high resolution image" class="absolute bottom-5 right-5 flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-surface-lowest/80 backdrop-blur-md border border-aqua/30 text-pearl text-xs font-mono group-hover:border-aqua group-hover:text-aqua transition-all">
+<svg class="w-3.5 h-3.5 text-aqua" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+<path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+<span class="">Expand Sanctuary View</span>
+</button>
+</div>
+<!-- Decorative Aqua Glow Accents -->
+<div class="absolute -bottom-6 -left-6 w-48 h-48 bg-aqua/10 rounded-full blur-3xl -z-10 pointer-events-none"></div>
+</div>
+<!-- Editorial Copy Column -->
+<div class="lg:col-span-5 flex flex-col justify-center">
+<div class="inline-flex items-center gap-2 text-aqua text-xs uppercase font-mono tracking-[0.3em] mb-4">
+<span class="w-1.5 h-1.5 rounded-full bg-aqua"></span>
+              Architectural Sanctuary
+            </div>
+<h2 class="font-serif text-3xl sm:text-4xl lg:text-5xl text-pearl-pure leading-tight mb-6">
+              Curved Organic Intimacy, 10 Meters Subsurface.
+            </h2>
+<p class="text-pearl-dim text-sm sm:text-base leading-relaxed mb-6 font-normal">
+              Designed by visionary marine architects, each alcove mirrors the fluid anatomy of pelagic organisms. Guests are cocooned in acoustic curved midnight-velvet banquettes, insulated from exterior engine vibrations, allowing only the rhythmic pulse of marine life outside.
+            </p>
+<p class="text-pearl-dim text-sm sm:text-base leading-relaxed mb-8">
+              At this sunlight stratum, midday beams refract across custom marble tables like shimmering spider silk, while evening transforms the viewing window into an electric theatre of shimmering reef fish and cruising blacktip reef sharks.
+            </p>
+<!-- Feature Bullet Pillars -->
+<div class="space-y-4 border-l border-aqua/20 pl-5 mb-8">
+<div>
+<h3 class="font-serif text-pearl-pure font-medium text-base">Sound-Absorptive Acoustic Architecture</h3>
+<p class="text-pearl-dim/80 text-xs font-sans mt-0.5">Ultra-quiet atmosphere engineered to preserve conversation and ocean stillness.</p>
+</div>
+<div>
+<h3 class="font-serif text-pearl-pure font-medium text-base">Pressure-Equalized Microclimate</h3>
+<p class="text-pearl-dim/80 text-xs font-sans mt-0.5">Constant gentle sea-breeze atmospheric scrubbers mimicking alpine freshness.</p>
+</div>
+</div>
+<div>
+<a class="inline-flex items-center gap-3 text-aqua text-xs tracking-widest uppercase font-semibold group hover:text-white transition-colors" href="#reservation">
+<span class="">Reserve An Exclusive Booth</span>
+<svg class="w-4 h-4 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+<path d="M14 5l7 7m0 0l-7 7m7-7H3" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</a>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- END: ExperienceSection -->
+<!-- BEGIN: MenuSection -->
+<section class="py-28 px-6 relative border-t border-aqua/10 bg-surface-low/30" data-purpose="tasting-menu" id="menu" style="background: linear-gradient(rgb(5, 39, 62) 0%, rgb(4, 33, 53) 50%, rgb(3, 26, 44) 100%);">
+<div class="max-w-7xl mx-auto"><!-- 18M Mid-Reef Marine Fauna: Spotted Eagle Rays & Schooling Silver Barracudas -->
+<div class="w-full flex items-center justify-between mb-10 pb-4 border-b border-aqua/20 flex-wrap gap-4">
+  <div class="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-surface-lowest/80 backdrop-blur-md border border-aqua/30 text-xs font-mono text-pearl shadow-glow-aqua">
+    <span class="w-2 h-2 rounded-full bg-aqua animate-ping"></span>
+    <span class="uppercase tracking-widest text-pearl-pure font-bold">STRATUM 03 · 18M REEF DROP-OFF</span>
+    <span class="text-aqua/80">— AETOBATUS NARINARI (SPOTTED EAGLE RAY) &amp; SPHYRAENA BARRACUDA</span>
+  </div>
+  <div class="flex items-center gap-4 text-[11px] font-mono text-pearl-dim">
+    <span class="text-pearl-pure font-semibold">Ambient Sunlight: 18%</span>
+    <span class="text-pearl-dim/60">•</span>
+    <span class="text-aqua">Benthic Pressure: 2.8 ATM</span>
+  </div>
+</div>
+
+<div class="flex items-center justify-between w-full mb-6 px-2 pointer-events-none">
+  <!-- Spotted Eagle Ray with Spotted Pattern -->
+  <div class="opacity-45 anim-manta flex items-center gap-3" style="animation-duration: 13s;">
+    <svg width="140" height="70" viewBox="0 0 140 70" fill="none">
+      <path d="M20 35 C40 18 70 8 95 20 C85 30 70 34 76 35 C70 36 85 40 95 50 C70 62 40 52 20 35 Z" fill="#38d6d0" fill-opacity="0.18" stroke="#38d6d0" stroke-width="1.3"></path>
+      <!-- White/Pearl spots on wings -->
+      <circle cx="42" cy="30" r="1.2" fill="#cfe5fb"></circle>
+      <circle cx="52" cy="26" r="1.4" fill="#cfe5fb"></circle>
+      <circle cx="62" cy="24" r="1.3" fill="#cfe5fb"></circle>
+      <circle cx="42" cy="40" r="1.2" fill="#cfe5fb"></circle>
+      <circle cx="52" cy="44" r="1.4" fill="#cfe5fb"></circle>
+      <circle cx="62" cy="46" r="1.3" fill="#cfe5fb"></circle>
+      <!-- Whip tail -->
+      <path d="M76 35 Q105 34 135 32" stroke="#38d6d0" stroke-width="1.1" stroke-linecap="round"></path>
+    </svg>
+    <span class="font-mono text-[8px] uppercase tracking-widest text-pearl-dim/80">Spotted Eagle Ray</span>
+  </div>
+
+  <!-- School of streamlined Silver Barracudas -->
+  <div class="opacity-55 anim-school hidden sm:flex items-center gap-2" style="animation-duration: 8s;">
+    <svg width="130" height="45" viewBox="0 0 130 45" fill="none">
+      <path d="M10 12 L70 9 L80 13 L95 8 L90 15 L70 16 Z" fill="#cfe5fb" fill-opacity="0.6" stroke="#38d6d0" stroke-width="0.8"></path>
+      <path d="M25 24 L85 21 L95 25 L110 20 L105 27 L85 28 Z" fill="#cfe5fb" fill-opacity="0.75" stroke="#38d6d0" stroke-width="0.8"></path>
+      <path d="M40 36 L100 33 L110 37 L125 32 L120 39 L100 40 Z" fill="#cfe5fb" fill-opacity="0.6" stroke="#38d6d0" stroke-width="0.8"></path>
+    </svg>
+    <span class="font-mono text-[8px] uppercase tracking-widest text-pearl-dim/80">Barracuda School · 18M</span>
+  </div>
+</div>
+<!-- Menu Header & Interactive Filter Bar -->
+<div class="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
+<div>
+<div class="inline-flex items-center gap-2 text-aqua text-xs uppercase font-mono tracking-[0.3em] mb-3">
+<span class="w-1.5 h-1.5 rounded-full bg-aqua"></span>
+              Culinary Stratigraphy
+            </div>
+<h2 class="font-serif text-3xl sm:text-5xl text-pearl-pure tracking-tight">Taste The Tide</h2>
+<p class="text-pearl-dim text-sm max-w-lg mt-2 font-normal">
+              Gastronomic art inspired by pelagic bioluminescence, sea botanical infusions, and deep ocean terroir.
+            </p>
+</div>
+<!-- Category Buttons -->
+<div aria-label="Menu category filters" class="flex flex-wrap gap-2 p-1.5 rounded-full bg-surface-lowest border border-aqua/20" role="tablist">
+<button aria-selected="true" class="menu-filter-btn px-4 py-2 rounded-full text-xs font-medium uppercase tracking-wider transition-all bg-aqua text-surface-lowest shadow-glow-aqua" data-filter="all" role="tab">
+              All Selections
+            </button>
+<button aria-selected="false" class="menu-filter-btn px-4 py-2 rounded-full text-xs font-medium uppercase tracking-wider text-pearl-dim hover:text-aqua transition-all" data-filter="drinks" role="tab">
+              Signature Drinks
+            </button>
+<button aria-selected="false" class="menu-filter-btn px-4 py-2 rounded-full text-xs font-medium uppercase tracking-wider text-pearl-dim hover:text-aqua transition-all" data-filter="desserts" role="tab">
+              Desserts
+            </button>
+<button aria-selected="false" class="menu-filter-btn px-4 py-2 rounded-full text-xs font-medium uppercase tracking-wider text-pearl-dim hover:text-aqua transition-all" data-filter="plates" role="tab">
+              Small Plates
+            </button>
+</div>
+</div>
+<!-- Menu Cards Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8" id="menu-items-grid">
+<!-- Card 1: Blue Current Cocktail -->
+<div class="menu-card glass-card glass-card-hover rounded-2xl overflow-hidden flex flex-col transition-all duration-300" data-category="drinks">
+<div class="relative h-64 overflow-hidden group">
+<img alt="Blue Current cocktail layered with pea blossom and edible pearl shell" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" src="https://lh3.googleusercontent.com/aida/AEtjO1VvQyIjQj43Pqeck1xypiTpeADoovgNILCqWvFm9RrAX0dgN3qfeUQuq-vuSNoID0TZjmEQEb4ZTJxwUWkrwspT3ZeaWxmror58ugyGR3eqrMb1i-ifmIxCo8M6iNjAnV7xYeTWildL5Q-mYfGIM4CWBzzzrDSfPD6HW2wrtsalXmw89J_kziMGlLdoANvbpJOeB9Xr9-E0X1O4LuUAilLDJA6-q5W_Z5m5F-ag45QTwP1402sSFotBY3Jo">
+<span class="absolute top-3 right-3 px-3 py-1 rounded-full text-[10px] font-mono uppercase bg-surface-lowest/80 text-aqua border border-aqua/30">Cocktail • 15M</span>
+</div>
+<div class="p-6 flex flex-col flex-grow justify-between">
+<div>
+<div class="flex items-baseline justify-between mb-2">
+<h3 class="font-serif text-lg font-bold text-pearl-pure">Blue Current</h3>
+<span class="font-mono text-sm text-aqua">$32</span>
+</div>
+<p class="text-pearl-dim/80 text-xs leading-relaxed mb-4">
+                  Butterfly pea blossom distillate, cold-pressed bergamot, micro-sparkling effervescence, crowned with hand-spun mother-of-pearl sugar disk.
+                </p>
+</div>
+<div class="pt-3 border-t border-aqua/10 flex items-center justify-between text-[11px] font-mono text-pearl-dim">
+<span class="">Botanical • Citrus</span>
+<span class="text-coral">Signature</span>
+</div>
+</div>
+</div>
+<!-- Card 2: Abyss Tiramisu -->
+<div class="menu-card glass-card glass-card-hover rounded-2xl overflow-hidden flex flex-col transition-all duration-300" data-category="desserts">
+<div class="relative h-64 overflow-hidden group">
+<img alt="Abyss Tiramisu with dark chocolate spheres and cyan sugar coral" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" src="https://lh3.googleusercontent.com/aida/AEtjO1U8ex9lVgrWgraCbJXZf5HTUb1CV7ryA5L45_YJznRDPJaGeC1Mw_x9-5_VisGNVnk0MzScyKsKIIm7KAqaNDm4TRHMX5WlMe8Bc09_vstHCmkM_5Jb9zkhJfaVjvokoJVTbiOERmb0NuS0tsc_IU05j_SuQ3WzW4eTT-BkgohjMhxQgYpLTrVdg1tpzVOKdYOg9v7whvzgVjzaW9Auj02IROs8Jr298B9LNP9zVJ82iuZZ-l5l2IVII7hx">
+<span class="absolute top-3 right-3 px-3 py-1 rounded-full text-[10px] font-mono uppercase bg-surface-lowest/80 text-coral border border-coral/30">Pastry • 30M</span>
+</div>
+<div class="p-6 flex flex-col flex-grow justify-between">
+<div>
+<div class="flex items-baseline justify-between mb-2">
+<h3 class="font-serif text-lg font-bold text-pearl-pure">Abyss Tiramisu</h3>
+<span class="font-mono text-sm text-aqua">$28</span>
+</div>
+<p class="text-pearl-dim/80 text-xs leading-relaxed mb-4">
+                  72% Valrhona dark cocoa spheres filled with cold-extracted espresso and sea-salt mascarpone cream, resting on cyan bioluminescent sugar coral.
+                </p>
+</div>
+<div class="pt-3 border-t border-aqua/10 flex items-center justify-between text-[11px] font-mono text-pearl-dim">
+<span class="">Dark Cocoa • Espresso</span>
+<span class="text-aqua">Michelin Crafted</span>
+</div>
+</div>
+</div>
+<!-- Card 3: Pearl Latte -->
+<div class="menu-card glass-card glass-card-hover rounded-2xl overflow-hidden flex flex-col transition-all duration-300" data-category="drinks">
+<div class="relative h-64 overflow-hidden group bg-surface-mid flex items-center justify-center">
+<div class="relative w-36 h-36 rounded-full border border-aqua/30 flex items-center justify-center bg-surface-lowest/60">
+<div class="w-24 h-24 rounded-full bg-gradient-to-tr from-pearl to-aqua/40 animate-pulse flex items-center justify-center text-center p-3 text-surface-lowest text-xs font-serif font-bold">
+                  Warm Shimmer Foam
+                </div>
+</div>
+<span class="absolute top-3 right-3 px-3 py-1 rounded-full text-[10px] font-mono uppercase bg-surface-lowest/80 text-aqua border border-aqua/30">Café • 05M</span>
+</div>
+<div class="p-6 flex flex-col flex-grow justify-between">
+<div>
+<div class="flex items-baseline justify-between mb-2">
+<h3 class="font-serif text-lg font-bold text-pearl-pure">Pearl Dust Latte</h3>
+<span class="font-mono text-sm text-aqua">$19</span>
+</div>
+<p class="text-pearl-dim/80 text-xs leading-relaxed mb-4">
+                  Ethically sourced single-origin Ethiopian Geisha roast, steamed oat silk infused with marine sea kelp nectar and iridescent natural mica dust.
+                </p>
+</div>
+<div class="pt-3 border-t border-aqua/10 flex items-center justify-between text-[11px] font-mono text-pearl-dim">
+<span class="">Velvet • Floral</span>
+<span class="text-pearl">Warm Reserve</span>
+</div>
+</div>
+</div>
+<!-- Card 4: Coral Fizz & Scallop Crudo -->
+<div class="menu-card glass-card glass-card-hover rounded-2xl overflow-hidden flex flex-col transition-all duration-300" data-category="plates">
+<div class="relative h-64 overflow-hidden group bg-surface-mid flex items-center justify-center">
+<!-- Geometric Minimal Oceanic Art Representation -->
+<div class="relative w-40 h-40 rounded-2xl border border-coral/30 flex flex-col items-center justify-center p-4 bg-surface-lowest/70 text-center">
+<span class="w-8 h-8 rounded-full bg-coral/30 border border-coral flex items-center justify-center text-coral mb-2">
+                  ✦
+                </span>
+<span class="text-xs font-serif text-pearl-pure font-semibold">Tide Ceviche &amp; Coral Pearls</span>
+<span class="text-[10px] font-mono text-coral mt-1">Yuzu Sea Espuma</span>
+</div>
+<span class="absolute top-3 right-3 px-3 py-1 rounded-full text-[10px] font-mono uppercase bg-surface-lowest/80 text-coral border border-coral/30">Plates • 25M</span>
+</div>
+<div class="p-6 flex flex-col flex-grow justify-between">
+<div>
+<div class="flex items-baseline justify-between mb-2">
+<h3 class="font-serif text-lg font-bold text-pearl-pure">Coral Fizz Crudo</h3>
+<span class="font-mono text-sm text-aqua">$36</span>
+</div>
+<p class="text-pearl-dim/80 text-xs leading-relaxed mb-4">
+                  Hand-dived king scallop thinly shaved over crystallized sea grapes, pink grapefruit reduction, and sparkling rose hip sea foam.
+                </p>
+</div>
+<div class="pt-3 border-t border-aqua/10 flex items-center justify-between text-[11px] font-mono text-pearl-dim">
+<span class="">Hand-Dived • Citrus</span>
+<span class="text-coral">Ocean Fresh</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Special Degustation Notice -->
+<div class="mt-14 glass-card p-6 sm:p-8 rounded-2xl border-aqua/20 flex flex-col sm:flex-row items-center justify-between gap-6">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-full border border-aqua/50 flex items-center justify-center text-aqua text-xl shrink-0 font-serif">
+              Ω
+            </div>
+<div>
+<h4 class="font-serif text-lg text-pearl-pure">The Seven Strata Tasting Experience</h4>
+<p class="text-xs text-pearl-dim mt-0.5">Seven paired courses synchronized with evening underwater ambient lighting shift. Limited to 18 covers per night.</p>
+</div>
+</div>
+<a class="px-6 py-3 rounded-full border border-aqua text-aqua hover:bg-aqua hover:text-surface-lowest text-xs uppercase font-mono tracking-widest transition-all whitespace-nowrap" href="#reservation">
+            Inquire Tasting Menu →
+          </a>
+</div>
+</div>
+</section>
+<!-- END: MenuSection -->
+<!-- BEGIN: AmbienceMosaic -->
+<section class="py-28 px-6 relative border-t border-aqua/10 bg-surface-lowest" data-purpose="ambience-gallery" id="ambience" style="background: linear-gradient(rgb(3, 26, 44) 0%, rgb(2, 22, 38) 50%, rgb(2, 17, 31) 100%);">
+<div class="max-w-7xl mx-auto"><!-- 22M Mesopelagic Twilight Fauna: Bioluminescent Comb Jellies & Chambered Nautilus -->
+<div class="w-full flex items-center justify-between mb-12 pb-4 border-b border-aqua/20 flex-wrap gap-4">
+  <div class="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-surface-lowest/80 backdrop-blur-md border border-aqua/30 text-xs font-mono text-pearl shadow-glow-aqua">
+    <span class="w-2 h-2 rounded-full bg-coral animate-pulse"></span>
+    <span class="uppercase tracking-widest text-pearl-pure font-bold">STRATUM 04 · 22M TWILIGHT MESOPELAGIC</span>
+    <span class="text-coral/90">— CTENOPHORA (COMB JELLIES) &amp; NAUTILUS POMPILIUS</span>
+  </div>
+  <div class="flex items-center gap-4 text-[11px] font-mono text-pearl-dim">
+    <span class="text-aqua font-semibold">Light: 1.5% Twilight</span>
+    <span class="text-pearl-dim/60">•</span>
+    <span class="text-coral">Bioluminescent Organisms Dominant</span>
+  </div>
+</div>
+
+<div class="flex items-center justify-between w-full mb-8 px-4 pointer-events-none">
+  <!-- Comb Jelly with Rainbow Cilia -->
+  <div class="flex items-center gap-3 anim-photophore">
+    <svg width="70" height="70" viewBox="0 0 70 70" fill="none">
+      <ellipse cx="35" cy="35" rx="24" ry="30" stroke="#38d6d0" stroke-width="1.4" class="anim-ctenophore" fill="rgba(56,214,208,0.12)"></ellipse>
+      <path d="M23 15 Q20 35 23 55 M30 8 Q28 35 30 62 M40 8 Q42 35 40 62 M47 15 Q50 35 47 55" stroke="#ffad9c" stroke-width="1.2" stroke-dasharray="2 2" class="anim-ctenophore"></path>
+      <!-- Trailing sensory tentacles -->
+      <path d="M28 65 Q22 85 25 100 M42 65 Q48 85 45 100" stroke="#c4b5fd" stroke-width="0.9" opacity="0.7"></path>
+    </svg>
+    <span class="font-mono text-[9px] uppercase tracking-widest text-coral/90">Ctenophora · Comb Jelly (Prismatic Cilia)</span>
+  </div>
+
+  <!-- Chambered Nautilus Spiral Silhouette -->
+  <div class="flex items-center gap-3 opacity-60 hidden sm:flex">
+    <span class="font-mono text-[9px] uppercase tracking-widest text-pearl-dim">Nautilus pompilius</span>
+    <svg width="75" height="65" viewBox="0 0 75 65" fill="none">
+      <path d="M55 45 C65 35 68 18 55 10 C40 2 20 8 10 25 C2 40 12 55 28 60 C42 64 56 58 65 48" stroke="#ffad9c" stroke-width="1.5" fill="rgba(255,173,156,0.15)"></path>
+      <path d="M50 42 C56 34 56 22 48 16 C38 12 25 16 20 26 C15 35 20 45 30 48" stroke="#38d6d0" stroke-width="1" fill="none"></path>
+      <!-- Tentacles extending from aperture -->
+      <path d="M62 46 L74 42 M65 48 L76 49 M63 52 L73 56" stroke="#cfe5fb" stroke-width="1.2" stroke-linecap="round"></path>
+    </svg>
+  </div>
+</div>
+<div class="text-center max-w-3xl mx-auto mb-16">
+<div class="inline-flex items-center gap-2 text-aqua text-xs uppercase font-mono tracking-[0.3em] mb-3">
+<span class="w-1.5 h-1.5 rounded-full bg-aqua"></span>
+            Interior Topography
+          </div>
+<h2 class="font-serif text-3xl sm:text-5xl text-pearl-pure tracking-tight mb-4">The Ambience Mosaic</h2>
+<p class="text-pearl-dim text-sm sm:text-base font-normal">
+            Click any spatial quadrant to explore architectural details, underwater soundscapes, and panoramic acrylic engineering.
+          </p>
+</div>
+<!-- Mosaic Asymmetric Grid -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-6 items-stretch">
+<!-- Mosaic 1: Panoramic Atrium (Large Left) -->
+<div class="md:col-span-8 group relative overflow-hidden rounded-2xl border border-aqua/20 glass-card cursor-pointer min-h-[380px] sm:min-h-[460px]">
+<img alt="Panoramic curved glass dining hall with soaring ocean view" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-lightbox-caption="Our grand architectural hall features 120mm reinforced seamless acrylic arches, offering uninterrupted sightlines into the open Maldives pelagic channel." data-lightbox-src="https://lh3.googleusercontent.com/aida/AEtjO1UnsysO0Qf5Adm5WgsjrzT4xJOyKiztkT0PzUQVttB0kpJWWZfiOM5NLFm60Uc1rGUvCnJzdMbyki6Wq8a4Mr7GWRtvtTrJXmH0TBEwLTDAAigthNlWJcqYRxcACYuvtMq0GgTO-midPBM5IVLAWu6-ZE7d7wol-Qw02hw5HBTPwSnsE23fqAeBjLxh52_vvjXIHYhdfyYzKbbMpeCd_N_pOkL7sq15nbb-IS1pl2YdQLPx2_2kUpaDZxA" data-lightbox-title="Main Panoramic Curved Atrium" src="https://lh3.googleusercontent.com/aida/AEtjO1UnsysO0Qf5Adm5WgsjrzT4xJOyKiztkT0PzUQVttB0kpJWWZfiOM5NLFm60Uc1rGUvCnJzdMbyki6Wq8a4Mr7GWRtvtTrJXmH0TBEwLTDAAigthNlWJcqYRxcACYuvtMq0GgTO-midPBM5IVLAWu6-ZE7d7wol-Qw02hw5HBTPwSnsE23fqAeBjLxh52_vvjXIHYhdfyYzKbbMpeCd_N_pOkL7sq15nbb-IS1pl2YdQLPx2_2kUpaDZxA">
+<div class="absolute inset-0 bg-gradient-to-t from-surface-lowest via-surface-lowest/30 to-transparent"></div>
+<div class="absolute bottom-6 left-6 right-6 flex items-end justify-between">
+<div>
+<span class="text-aqua text-xs font-mono uppercase tracking-widest">Zone 01 • 30M Depth</span>
+<h3 class="font-serif text-2xl text-pearl-pure font-bold mt-1">The Grand Glass Atrium</h3>
+<p class="text-xs text-pearl-dim/90 max-w-md mt-1 hidden sm:block">Where rays, turtles, and open ocean reef fish cruise past morning espresso and evening feasts.</p>
+</div>
+<span class="w-10 h-10 rounded-full bg-surface-lowest/80 border border-aqua/30 flex items-center justify-center text-aqua group-hover:bg-aqua group-hover:text-surface-lowest transition-colors shrink-0 ml-4">
+                +
+              </span>
+</div>
+</div>
+<!-- Mosaic 2: Private Anemone Booths (Top Right) -->
+<div class="md:col-span-4 group relative overflow-hidden rounded-2xl border border-aqua/20 glass-card cursor-pointer min-h-[220px]">
+<img alt="Anemone private dining booth" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-lightbox-caption="Designed for romantic isolation and executive luncheons with personal hydrophone headsets." data-lightbox-src="https://lh3.googleusercontent.com/aida/AEtjO1XC8xxeaIN-0mu8L-GgGgJx4S7JaqzGl_UHhtxZUdPqXBxgsvcbH5qSOAuyNpiPxvAD_jLXZXOoUY60wQEDrzXDanwgo3T_F7HMXpcRhWp-yX-nr5HI1zk3ncdxqPgq7UmGqw-sN4ClwkGbHkh1lJ-wIfO-uRKm1jiVwbx8aF8v3iT1uiFnaQBMgirRYowFLKXMEImRuCsYWyX4eBVdJxL_tgWBE_tTcNj_GJpWASB3W1Ot1xmeRIkeaQJa" data-lightbox-title="Velvet Anemone Alcove" src="https://lh3.googleusercontent.com/aida/AEtjO1XC8xxeaIN-0mu8L-GgGgJx4S7JaqzGl_UHhtxZUdPqXBxgsvcbH5qSOAuyNpiPxvAD_jLXZXOoUY60wQEDrzXDanwgo3T_F7HMXpcRhWp-yX-nr5HI1zk3ncdxqPgq7UmGqw-sN4ClwkGbHkh1lJ-wIfO-uRKm1jiVwbx8aF8v3iT1uiFnaQBMgirRYowFLKXMEImRuCsYWyX4eBVdJxL_tgWBE_tTcNj_GJpWASB3W1Ot1xmeRIkeaQJa">
+<div class="absolute inset-0 bg-gradient-to-t from-surface-lowest via-transparent to-transparent"></div>
+<div class="absolute bottom-5 left-5 right-5 flex items-end justify-between">
+<div>
+<span class="text-aqua text-[10px] font-mono uppercase tracking-widest">Zone 02 • 10M Depth</span>
+<h3 class="font-serif text-lg text-pearl-pure font-bold mt-0.5">Private Alcoves</h3>
+</div>
+<span class="w-8 h-8 rounded-full bg-surface-lowest/80 border border-aqua/30 flex items-center justify-center text-aqua group-hover:bg-aqua group-hover:text-surface-lowest transition-colors shrink-0">
+                +
+              </span>
+</div>
+</div>
+<!-- Mosaic 3: Bioluminescent Cocktail Bar (Full Bottom Span) -->
+<div class="md:col-span-12 group relative overflow-hidden rounded-2xl border border-aqua/20 glass-card cursor-pointer min-h-[340px]">
+<img alt="Night underwater bar with glowing sea-glass slab" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-lightbox-caption="Hand-carved crystalline sea-glass bar slab illuminated by internal fiber optics mimicking abyssal phytoplankton." data-lightbox-src="https://lh3.googleusercontent.com/aida/AEtjO1Xkj1q09IUcIdWbhkn-5YB-rt-a7nwfUAHFMZymzJdznzHTryh4lCJ-KXqc0r8BJhvqiRnGir2a6-qzanM3Dj0TEwss-UCcCsGlGJ8_3CIgTf-k99otXl689VdRjjAbJAFq1XkyDEdH-AL9uA8upbSsBeqCMKFKxFjmTLcccNI7Pl2_sAW_61uOJ2OKKA-VjVpPeeLzhcBUmq6JS1Oay_GO-gygyBgtquZSreDD4WLcBJLQPPcbPWA4PV0b" data-lightbox-title="The Deep Bioluminescent Bar" src="https://lh3.googleusercontent.com/aida/AEtjO1Xkj1q09IUcIdWbhkn-5YB-rt-a7nwfUAHFMZymzJdznzHTryh4lCJ-KXqc0r8BJhvqiRnGir2a6-qzanM3Dj0TEwss-UCcCsGlGJ8_3CIgTf-k99otXl689VdRjjAbJAFq1XkyDEdH-AL9uA8upbSsBeqCMKFKxFjmTLcccNI7Pl2_sAW_61uOJ2OKKA-VjVpPeeLzhcBUmq6JS1Oay_GO-gygyBgtquZSreDD4WLcBJLQPPcbPWA4PV0b">
+<div class="absolute inset-0 bg-gradient-to-t from-surface-lowest via-surface-lowest/40 to-transparent"></div>
+<div class="absolute bottom-6 left-6 right-6 flex items-end justify-between">
+<div>
+<span class="text-coral text-xs font-mono uppercase tracking-widest">Zone 03 • Nocturnal Stratum</span>
+<h3 class="font-serif text-2xl text-pearl-pure font-bold mt-1">The Midnight Sea-Glass Counter</h3>
+<p class="text-xs text-pearl-dim/90 max-w-lg mt-1 hidden sm:block">Submerged mixology illuminated by cold crystalline cyan lights, accompanied by live ambient cello and marine acoustics.</p>
+</div>
+<span class="w-10 h-10 rounded-full bg-surface-lowest/80 border border-aqua/30 flex items-center justify-center text-aqua group-hover:bg-aqua group-hover:text-surface-lowest transition-colors shrink-0">
+                +
+              </span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- END: AmbienceMosaic -->
+<!-- BEGIN: DeepBarSection -->
+<section class="py-28 px-6 relative border-t border-aqua/10 bg-surface-lowest overflow-hidden" data-purpose="deep-bar-spotlight" id="the-deep-bar" style="background: linear-gradient(rgb(2, 17, 31) 0%, rgb(1, 13, 25) 50%, rgb(1, 10, 20) 100%);">
+<!-- Glow ambient backdrop -->
+<div class="absolute top-1/2 left-0 w-96 h-96 bg-aqua/10 rounded-full blur-[120px] pointer-events-none -translate-y-1/2"></div>
+<div class="max-w-7xl mx-auto"><!-- 26M Bathypelagic Midnight Fauna: Vampire Squid & Glowing Lanternfish Photophores -->
+<div class="w-full flex items-center justify-between mb-12 pb-4 border-b border-aqua/20 flex-wrap gap-4">
+  <div class="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-surface-lowest/90 backdrop-blur-md border border-coral/30 text-xs font-mono text-pearl shadow-glow-coral">
+    <span class="w-2 h-2 rounded-full bg-coral animate-ping"></span>
+    <span class="uppercase tracking-widest text-pearl-pure font-bold">STRATUM 05 · 26M BATHYPELAGIC MIDNIGHT ZONE</span>
+    <span class="text-coral">— VAMPYROTEUTHIS INFERNALIS &amp; MYCTOPHIDAE (LANTERNFISH)</span>
+  </div>
+  <div class="flex items-center gap-4 text-[11px] font-mono text-pearl-dim">
+    <span class="text-coral font-bold">Solar Light: 0% Absolute Darkness</span>
+    <span class="text-pearl-dim/60">•</span>
+    <span class="text-aqua">Photophores: 100% Endogenous Luminescence</span>
+  </div>
+</div>
+
+<div class="flex items-center justify-between w-full mb-8 px-2 pointer-events-none">
+  <!-- Vampire Squid (Vampyroteuthis infernalis) with glowing tip photophores -->
+  <div class="flex items-center gap-3 anim-photophore">
+    <svg width="90" height="65" viewBox="0 0 90 65" fill="none">
+      <!-- Cloak Mantle -->
+      <path d="M45 5 C35 25 15 45 10 52 C25 55 45 42 50 42 C55 42 75 55 90 52 C85 45 65 25 55 5 Z" fill="rgba(100, 13, 1, 0.45)" stroke="#ffad9c" stroke-width="1.4"></path>
+      <!-- Fin flaps -->
+      <ellipse cx="32" cy="14" rx="10" ry="5" fill="rgba(255,173,156,0.3)" stroke="#ffad9c" stroke-width="1"></ellipse>
+      <ellipse cx="68" cy="14" rx="10" ry="5" fill="rgba(255,173,156,0.3)" stroke="#ffad9c" stroke-width="1"></ellipse>
+      <!-- Bioluminescent Photophores at arm tips -->
+      <circle cx="10" cy="52" r="2.5" fill="#38d6d0" class="anim-photophore"></circle>
+      <circle cx="30" cy="48" r="2" fill="#38d6d0" class="anim-photophore"></circle>
+      <circle cx="70" cy="48" r="2" fill="#38d6d0" class="anim-photophore"></circle>
+      <circle cx="90" cy="52" r="2.5" fill="#38d6d0" class="anim-photophore"></circle>
+      <!-- Large glowing dark blue eye -->
+      <circle cx="50" cy="22" r="6" fill="#00101c" stroke="#38d6d0" stroke-width="1.5"></circle>
+      <circle cx="50" cy="22" r="3" fill="#38d6d0"></circle>
+    </svg>
+    <span class="font-mono text-[9px] uppercase tracking-widest text-coral">Vampyroteuthis infernalis · Vampire Squid</span>
+  </div>
+
+  <!-- Deep-sea Lanternfish with Photophore Row -->
+  <div class="flex items-center gap-2 hidden sm:flex anim-photophore">
+    <span class="font-mono text-[9px] uppercase tracking-widest text-aqua">Lanternfish (Myctophid photophores)</span>
+    <svg width="85" height="35" viewBox="0 0 85 35" fill="none">
+      <path d="M10 18 C25 8 55 10 70 18 C65 13 72 6 80 8 C76 17 72 23 80 28 C72 29 65 22 70 18 C55 26 25 28 10 18 Z" fill="rgba(56, 214, 208, 0.2)" stroke="#38d6d0" stroke-width="1.2"></path>
+      <!-- Glowing photophore beads along belly -->
+      <circle cx="24" cy="22" r="1.2" fill="#5ff3ec" class="anim-photophore"></circle>
+      <circle cx="32" cy="23" r="1.2" fill="#5ff3ec" class="anim-photophore"></circle>
+      <circle cx="40" cy="24" r="1.2" fill="#5ff3ec" class="anim-photophore"></circle>
+      <circle cx="48" cy="23" r="1.2" fill="#5ff3ec" class="anim-photophore"></circle>
+      <circle cx="56" cy="22" r="1.2" fill="#5ff3ec" class="anim-photophore"></circle>
+      <!-- Eye -->
+      <circle cx="18" cy="15" r="2.5" fill="#5ff3ec"></circle>
+    </svg>
+  </div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+<div class="lg:col-span-5 order-2 lg:order-1">
+<div class="inline-flex items-center gap-2 text-coral text-xs uppercase font-mono tracking-[0.3em] mb-4">
+<span class="w-1.5 h-1.5 rounded-full bg-coral"></span>
+              Twilight Nocturne • 21:00 Till Late
+            </div>
+<h2 class="font-serif text-3xl sm:text-4xl lg:text-5xl text-pearl-pure leading-tight mb-6">
+              The Deep Bar: Liquid Alchemy in the Midnight Abyss.
+            </h2>
+<p class="text-pearl-dim text-sm sm:text-base leading-relaxed mb-6 font-normal">
+              When darkness enshrouds the exterior waters, ABYSSÉ dims all interior fixtures, igniting our centerpiece: a twelve-meter hand-chiseled monolithic sea-glass counter radiating soft bioluminescent cyan.
+            </p>
+<p class="text-pearl-dim text-sm sm:text-base leading-relaxed mb-8">
+              Watch nocturnal cephalopods and glowing siphonophores drift past the glass while our mixologists craft infusions using oceanic botanicals, sea kelp salts, and clarified sea buckthorn distillations.
+            </p>
+<div class="grid grid-cols-2 gap-4 mb-8">
+<div class="p-4 rounded-xl glass-card border-aqua/15">
+<div class="font-serif text-lg text-aqua font-bold">12m</div>
+<div class="text-[11px] font-mono uppercase text-pearl-dim mt-1">Carved Sea-Glass Bar</div>
+</div>
+<div class="p-4 rounded-xl glass-card border-coral/15">
+<div class="font-serif text-lg text-coral font-bold">94+</div>
+<div class="text-[11px] font-mono uppercase text-pearl-dim mt-1">Rarest Maritime Gins</div>
+</div>
+</div>
+<a class="inline-flex items-center justify-center px-8 py-3.5 rounded-full bg-surface-low border border-aqua text-aqua hover:bg-aqua hover:text-surface-lowest font-medium uppercase tracking-widest text-xs transition-all shadow-glow-aqua" href="#reservation">
+              Reserve Deep Bar Seating
+            </a>
+</div>
+<div class="lg:col-span-7 order-1 lg:order-2">
+<div class="relative rounded-2xl overflow-hidden border border-aqua/30 shadow-2xl glass-card group">
+<img alt="Atmospheric midnight luxury deep ocean cocktail bar with glowing carved raw sea glass counter" class="w-full h-[450px] sm:h-[560px] object-cover transition-transform duration-700 group-hover:scale-105" src="https://lh3.googleusercontent.com/aida/AEtjO1Xkj1q09IUcIdWbhkn-5YB-rt-a7nwfUAHFMZymzJdznzHTryh4lCJ-KXqc0r8BJhvqiRnGir2a6-qzanM3Dj0TEwss-UCcCsGlGJ8_3CIgTf-k99otXl689VdRjjAbJAFq1XkyDEdH-AL9uA8upbSsBeqCMKFKxFjmTLcccNI7Pl2_sAW_61uOJ2OKKA-VjVpPeeLzhcBUmq6JS1Oay_GO-gygyBgtquZSreDD4WLcBJLQPPcbPWA4PV0b">
+<div class="absolute inset-0 bg-gradient-to-t from-surface-lowest via-transparent to-transparent opacity-50"></div>
+<div class="absolute top-4 left-4 px-3 py-1 rounded-full bg-surface-lowest/80 border border-aqua/30 text-[10px] font-mono uppercase text-aqua">
+                Live Acoustic Stratum Active
+              </div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- END: DeepBarSection -->
+<!-- BEGIN: ReservationSection -->
+<section class="py-28 px-6 relative border-t border-aqua/10 bg-surface-low/40" data-purpose="reservation-engine" id="reservation" style="background: linear-gradient(rgb(1, 10, 20) 0%, rgb(0, 8, 16) 50%, rgb(0, 5, 12) 100%);">
+<div class="max-w-4xl mx-auto"><!-- 30M Abyssopelagic Fauna: Deep Humpback Anglerfish with Esca Bulb & Giant Benthic Isopod -->
+<div class="w-full flex items-center justify-between mb-10 pb-4 border-b border-aqua/20 flex-wrap gap-4">
+  <div class="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-surface-lowest/95 backdrop-blur-md border border-aqua/40 text-xs font-mono text-pearl shadow-glow-aqua">
+    <span class="w-2 h-2 rounded-full bg-aqua animate-ping"></span>
+    <span class="uppercase tracking-widest text-pearl-pure font-bold">STRATUM 06 · 30M ABYSSOPELAGIC BENTHIC TABLE LAYER</span>
+    <span class="text-aqua font-semibold">— MELANOCETUS JOHNSONII (BLACK SEADEVIL) &amp; BATHYNOMUS</span>
+  </div>
+  <div class="flex items-center gap-4 text-[11px] font-mono text-pearl-dim">
+    <span class="text-aqua font-mono">Hydrostatic Pressure: 4.0 ATM</span>
+    <span class="text-pearl-dim/60">•</span>
+    <span class="text-pearl-pure">Bioluminescent Signal Active</span>
+  </div>
+</div>
+
+<div class="flex items-center justify-between w-full mb-8 px-2 pointer-events-none">
+  <!-- Humpback Anglerfish (Melanocetus johnsonii) with pulsating Esca lure -->
+  <div class="flex items-center gap-3">
+    <svg width="110" height="80" viewBox="0 0 110 80" fill="none">
+      <!-- Angler Lure Spine (Illicium) & Esca Bulb -->
+      <path d="M48 24 Q65 4 80 16" stroke="#38d6d0" stroke-width="1.8" stroke-linecap="round" fill="none"></path>
+      <circle cx="80" cy="16" r="4.5" fill="#5ff3ec" class="anim-photophore"></circle>
+      <circle cx="80" cy="16" r="9" fill="rgba(95, 243, 236, 0.25)" class="anim-photophore"></circle>
+      <!-- Round bulbous body -->
+      <path d="M20 48 C15 32 30 20 48 24 C68 28 80 42 75 58 C70 70 42 74 28 68 C20 62 15 54 20 48 Z" fill="rgba(0, 16, 28, 0.85)" stroke="#38d6d0" stroke-width="1.5"></path>
+      <!-- Needle Teeth -->
+      <path d="M58 48 L61 54 M63 47 L66 55 M68 49 L71 56 M73 50 L75 57" stroke="#cfe5fb" stroke-width="1.4" stroke-linecap="round"></path>
+      <path d="M59 62 L62 56 M64 63 L67 55 M69 62 L72 56" stroke="#cfe5fb" stroke-width="1.4" stroke-linecap="round"></path>
+      <!-- Pectoral and caudal fins -->
+      <path d="M18 48 L6 42 L10 52 L5 58 L18 52 Z" fill="rgba(56,214,208,0.3)" stroke="#38d6d0" stroke-width="1"></path>
+      <ellipse cx="38" cy="52" rx="6" ry="3" fill="rgba(56,214,208,0.3)" stroke="#38d6d0" stroke-width="1"></ellipse>
+      <!-- Tiny milky eye -->
+      <circle cx="52" cy="34" r="2" fill="#cfe5fb" stroke="#38d6d0" stroke-width="0.8"></circle>
+    </svg>
+    <span class="font-mono text-[9px] uppercase tracking-widest text-aqua">Melanocetus johnsonii · Deep Anglerfish</span>
+  </div>
+
+  <!-- Giant Deep-Sea Isopod (Bathynomus giganteus) -->
+  <div class="flex items-center gap-2 hidden sm:flex opacity-60">
+    <span class="font-mono text-[9px] uppercase tracking-widest text-pearl-dim">Bathynomus giganteus</span>
+    <svg width="70" height="45" viewBox="0 0 70 45" fill="none">
+      <ellipse cx="35" cy="22" rx="26" ry="14" fill="rgba(10, 33, 50, 0.7)" stroke="#38d6d0" stroke-width="1.2"></ellipse>
+      <!-- Segmented Thorax plates -->
+      <path d="M20 10 L20 34 M27 9 L27 35 M35 8 L35 36 M43 9 L43 35 M50 10 L50 34" stroke="#38d6d0" stroke-width="0.9" stroke-opacity="0.7"></path>
+      <!-- Large triangular eyes -->
+      <polygon points="52,16 57,18 53,20" fill="#cfe5fb"></polygon>
+      <polygon points="52,24 57,26 53,28" fill="#cfe5fb"></polygon>
+    </svg>
+  </div>
+</div>
+<div class="text-center mb-12">
+<div class="inline-flex items-center gap-2 text-aqua text-xs uppercase font-mono tracking-[0.3em] mb-3">
+<span class="w-1.5 h-1.5 rounded-full bg-aqua"></span>
+            Table Reservation Stratum
+          </div>
+<h2 class="font-serif text-3xl sm:text-5xl text-pearl-pure tracking-tight mb-3">Book Your Descent</h2>
+<p class="text-pearl-dim text-sm max-w-md mx-auto">
+            Descents are limited to ensure complete tranquility and uninterrupted oceanic panoramas.
+          </p>
+</div>
+<!-- Reservation Container Form Card -->
+<div class="glass-card rounded-2xl p-8 sm:p-12 border-aqua/30 shadow-2xl relative" style="background: rgba(1, 8, 14, 0.78); border-color: rgba(56, 214, 208, 0.28); box-shadow: rgba(0, 0, 0, 0.8) 0px 20px 50px, rgba(56, 214, 208, 0.12) 0px 0px 25px;">
+<!-- Dynamic Submission Confirmation Card (Initially Hidden) -->
+<div class="hidden text-center py-8" id="reservation-confirmation">
+<div class="w-16 h-16 rounded-full border-2 border-aqua bg-aqua/20 flex items-center justify-center text-aqua text-2xl mx-auto mb-6 shadow-glow-aqua">
+              ✓
+            </div>
+<span class="text-xs uppercase font-mono tracking-[0.3em] text-aqua">Descent Confirmed</span>
+<h3 class="font-serif text-3xl text-pearl-pure mt-2 mb-4">Your Table Has Been Reserved Beneath The Blue</h3>
+<div class="max-w-md mx-auto p-5 rounded-xl bg-surface-lowest/80 border border-aqua/20 text-left font-mono text-xs space-y-2.5 text-pearl-dim mb-8">
+<div class="flex justify-between border-b border-aqua/10 pb-2">
+<span class="">Confirmation ID:</span>
+<span class="text-aqua font-bold" id="confirm-id">ABY-8842-X</span>
+</div>
+<div class="flex justify-between border-b border-aqua/10 pb-2">
+<span class="">Guest Name:</span>
+<span class="text-pearl-pure" id="confirm-name"></span>
+</div>
+<div class="flex justify-between border-b border-aqua/10 pb-2">
+<span class="">Descent Date:</span>
+<span class="text-pearl-pure" id="confirm-date"></span>
+</div>
+<div class="flex justify-between border-b border-aqua/10 pb-2">
+<span class="">Atmospheric Stratum:</span>
+<span class="text-aqua" id="confirm-time"></span>
+</div>
+<div class="flex justify-between">
+<span class="">Party Size:</span>
+<span class="text-pearl-pure" id="confirm-party"></span>
+</div>
+</div>
+<p class="text-xs text-pearl-dim/70 max-w-sm mx-auto mb-8 font-sans">
+              A bespoke underwater arrival dossier and sea-transfer briefing have been dispatched to your provided email.
+            </p>
+<button class="px-6 py-2.5 rounded-full border border-aqua/50 text-aqua hover:bg-aqua hover:text-surface-lowest text-xs font-mono uppercase tracking-wider transition-all" id="reset-reservation-btn">
+              Modify Or Book Another Table
+            </button>
+</div>
+<!-- Active Reservation Form -->
+<form class="space-y-6" id="reservation-form" novalidate="">
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+<!-- Full Name -->
+<div>
+<label class="block text-xs font-mono uppercase tracking-wider text-pearl-dim mb-2" for="res-name">Guest Full Name</label>
+<input class="w-full bg-surface-lowest/80 border border-aqua/20 rounded-lg px-4 py-3 text-sm text-pearl placeholder-pearl-dim/30 focus:border-aqua focus:ring-1 focus:ring-aqua transition-colors" id="res-name" placeholder="e.g. Lady Vivienne Vance" required="" type="text">
+</div>
+<!-- Email -->
+<div>
+<label class="block text-xs font-mono uppercase tracking-wider text-pearl-dim mb-2" for="res-email">Private Email Address</label>
+<input class="w-full bg-surface-lowest/80 border border-aqua/20 rounded-lg px-4 py-3 text-sm text-pearl placeholder-pearl-dim/30 focus:border-aqua focus:ring-1 focus:ring-aqua transition-colors" id="res-email" placeholder="vance@residence.com" required="" type="email">
+</div>
+<!-- Party Size -->
+<div>
+<label class="block text-xs font-mono uppercase tracking-wider text-pearl-dim mb-2" for="res-guests">Party Size</label>
+<select class="w-full bg-surface-lowest/80 border border-aqua/20 rounded-lg px-4 py-3 text-sm text-pearl focus:border-aqua focus:ring-1 focus:ring-aqua transition-colors" id="res-guests">
+<option value="2 Guests (Private Anemone Booth)">2 Guests (Private Anemone Booth)</option>
+<option value="4 Guests (Curved Glass Table)">4 Guests (Curved Glass Table)</option>
+<option value="6 Guests (Center Reef View)">6 Guests (Center Reef View)</option>
+<option value="8+ Guests (VIP Salon Private Descent)">8+ Guests (VIP Salon Private Descent)</option>
+</select>
+</div>
+<!-- Date Picker -->
+<div>
+<label class="block text-xs font-mono uppercase tracking-wider text-pearl-dim mb-2" for="res-date">Descent Date</label>
+<input class="w-full bg-surface-lowest/80 border border-aqua/20 rounded-lg px-4 py-3 text-sm text-pearl focus:border-aqua focus:ring-1 focus:ring-aqua transition-colors" id="res-date" required="" type="date">
+</div>
+</div>
+<!-- Lighting Stratum Shift Selector -->
+<div>
+<label class="block text-xs font-mono uppercase tracking-wider text-pearl-dim mb-2" for="res-slot">Lighting Stratum &amp; Time Slot</label>
+<select class="w-full bg-surface-lowest/80 border border-aqua/20 rounded-lg px-4 py-3 text-sm text-pearl focus:border-aqua focus:ring-1 focus:ring-aqua transition-colors" id="res-slot">
+<option value="Sunlight Stratum — 12:30 (Reef Caustics &amp; Lunch)">Sunlight Stratum — 12:30 (Reef Caustics &amp; Lunch)</option>
+<option value="Twilight Transition — 17:30 (Golden Sunbeams to Deep Navy)">Twilight Transition — 17:30 (Golden Sunbeams to Deep Navy)</option>
+<option value="Abyssal Nocturne — 20:30 (Bioluminescence &amp; Deep Lounge)">Abyssal Nocturne — 20:30 (Bioluminescence &amp; Deep Lounge)</option>
+<option value="Midnight Tasting — 22:30 (The Deep Bar Cocktail Flight)">Midnight Tasting — 22:30 (The Deep Bar Cocktail Flight)</option>
+</select>
+</div>
+<!-- Dietary / Requests -->
+<div>
+<label class="block text-xs font-mono uppercase tracking-wider text-pearl-dim mb-2" for="res-notes">Special Marine Requests / Dietary Terroir</label>
+<textarea class="w-full bg-surface-lowest/80 border border-aqua/20 rounded-lg px-4 py-3 text-sm text-pearl placeholder-pearl-dim/30 focus:border-aqua focus:ring-1 focus:ring-aqua transition-colors" id="res-notes" placeholder="Allergies, champagne vintage preference, anniversary occasion, or acoustic preferences..." rows="3"></textarea>
+</div>
+<!-- Submit Button -->
+<button class="w-full py-4 rounded-full bg-aqua text-surface-lowest font-semibold uppercase tracking-widest text-xs hover:bg-pearl-pure hover:shadow-glow-aqua transition-all duration-300 transform active:scale-[0.99]" type="submit">
+              Confirm Descent Reservation
+            </button>
+<div class="flex items-center justify-center gap-2 text-[11px] font-mono text-pearl-dim/60 text-center">
+<svg class="w-3.5 h-3.5 text-aqua" fill="currentColor" viewBox="0 0 20 20">
+<path clip-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" fill-rule="evenodd"></path>
+</svg>
+<span class="">Subsurface safety pressurized seal certified • 48hr complimentary cancellation</span>
+</div>
+</form>
+</div>
+</div>
+</section>
+<!-- END: ReservationSection -->
+<!-- BEGIN: LocationSection -->
+<section class="py-24 px-6 relative border-t border-aqua/10 bg-surface-lowest" data-purpose="location-stratum" id="location" style="background: linear-gradient(rgb(0, 3, 8) 0%, rgb(0, 2, 6) 100%);">
+<div class="max-w-7xl mx-auto">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<!-- Box 1 -->
+<div class="glass-card p-8 rounded-2xl border-aqua/15 flex flex-col justify-between">
+<div>
+<span class="text-aqua font-mono text-xs uppercase tracking-widest">Arrival Logistics</span>
+<h3 class="font-serif text-xl text-pearl-pure mt-2 mb-3">Hydrofoil Transfer</h3>
+<p class="text-xs text-pearl-dim leading-relaxed font-sans">
+                Guests are escorted via silent electric hydrofoil yacht from Malé International Pier directly to our floating arrival deck, followed by an elevator descent 30 meters downward.
+              </p>
+</div>
+<div class="font-mono text-[11px] text-aqua mt-6 pt-4 border-t border-aqua/10">
+              Transfer Time: 22 Minutes
+            </div>
+</div>
+<!-- Box 2 -->
+<div class="glass-card p-8 rounded-2xl border-aqua/15 flex flex-col justify-between">
+<div>
+<span class="text-aqua font-mono text-xs uppercase tracking-widest">Geographical Datum</span>
+<h3 class="font-serif text-xl text-pearl-pure mt-2 mb-3">Benthic Coordinates</h3>
+<p class="text-xs text-pearl-dim leading-relaxed font-sans">
+                Stationed at Rangali Southern Atoll edge, resting upon ancient coral shelf granite bedrock with natural crystal-clear underwater visibility up to 45 meters year-round.
+              </p>
+</div>
+<div class="font-mono text-[11px] text-aqua mt-6 pt-4 border-t border-aqua/10">
+              3°29'42.1"N 72°50'18.4"E
+            </div>
+</div>
+<!-- Box 3 -->
+<div class="glass-card p-8 rounded-2xl border-coral/15 flex flex-col justify-between">
+<div>
+<span class="text-coral font-mono text-xs uppercase tracking-widest">Dress Code &amp; Protocol</span>
+<h3 class="font-serif text-xl text-pearl-pure mt-2 mb-3">Subsurface Elegance</h3>
+<p class="text-xs text-pearl-dim leading-relaxed font-sans">
+                Island Formal or Subaquatic Chic. We kindly request elegant evening wear for Twilight and Nocturne strata. Professional photography gear requires prior curatorial clearance.
+              </p>
+</div>
+<div class="font-mono text-[11px] text-coral mt-6 pt-4 border-t border-aqua/10">
+              Atmosphere: Quiet Luxury
+            </div>
+</div>
+</div>
+</div>
+</section><!-- BEGIN: ReviewsSection -->
+<section class="py-28 px-6 relative border-t border-aqua/10 bg-surface-low/30 overflow-hidden" data-purpose="critical-acclaim" id="reviews" style="background: linear-gradient(rgb(0, 5, 12) 0%, rgb(0, 4, 9) 50%, rgb(0, 3, 7) 100%);">
+<div class="absolute -top-10 left-1/2 -translate-x-1/2 w-96 h-96 bg-aqua/5 rounded-full blur-3xl pointer-events-none"></div>
+<div class="max-w-7xl mx-auto relative z-10"><!-- 32M Hadal Trench Marine Fauna: Ghostly Mariana Snailfish (Pseudoliparis swirei) -->
+<div class="w-full flex items-center justify-between mb-12 pb-4 border-b border-aqua/20 flex-wrap gap-4">
+  <div class="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-surface-lowest/95 backdrop-blur-md border border-aqua/30 text-xs font-mono text-pearl shadow-glow-aqua">
+    <span class="w-2 h-2 rounded-full bg-aqua animate-pulse"></span>
+    <span class="uppercase tracking-widest text-pearl-pure font-bold">STRATUM 07 · 32M HADAL TRENCH REALM</span>
+    <span class="text-aqua/80">— PSEUDOLIPARIS SWIREI (HADAL SNAILFISH) &amp; SIPHONOPHORES</span>
+  </div>
+  <div class="flex items-center gap-4 text-[11px] font-mono text-pearl-dim">
+    <span class="text-coral font-bold">Solar Radiation: 0.000%</span>
+    <span class="text-pearl-dim/60">•</span>
+    <span class="text-aqua">Benthic Crust Granitic Foundation</span>
+  </div>
+</div>
+
+<div class="flex items-center justify-between w-full mb-8 px-4 pointer-events-none">
+  <!-- Ghostly translucent Mariana Snailfish -->
+  <div class="flex items-center gap-3 anim-manta opacity-70" style="animation-duration: 12s;">
+    <svg width="120" height="45" viewBox="0 0 120 45" fill="none">
+      <!-- Translucent gelatinous tadpole body -->
+      <path d="M20 22 C12 18 10 12 18 8 C28 4 45 6 65 14 C85 20 105 22 118 22 C105 23 85 25 65 28 C45 34 28 36 18 32 C10 28 12 24 20 22 Z" fill="rgba(207, 229, 251, 0.15)" stroke="#cfe5fb" stroke-width="1.2"></path>
+      <!-- Internal translucent organ glow -->
+      <ellipse cx="32" cy="20" rx="10" ry="6" fill="rgba(255, 173, 156, 0.35)" filter="drop-shadow(0 0 8px #ffad9c)"></ellipse>
+      <!-- Tiny black vestigial eye -->
+      <circle cx="16" cy="15" r="1.5" fill="#00101c" stroke="#cfe5fb" stroke-width="0.8"></circle>
+      <!-- Broad fan-like ventral fin -->
+      <path d="M35 28 Q42 38 48 30" stroke="#38d6d0" stroke-width="1.1" fill="none"></path>
+    </svg>
+    <span class="font-mono text-[9px] uppercase tracking-widest text-pearl-pure/80">Pseudoliparis swirei · Hadal Snailfish</span>
+  </div>
+
+  <!-- Glowing deep siphonophore chain -->
+  <div class="flex items-center gap-2 hidden sm:flex anim-photophore">
+    <span class="font-mono text-[9px] uppercase tracking-widest text-coral">Deep Colonial Siphonophore</span>
+    <svg width="80" height="30" viewBox="0 0 80 30" fill="none">
+      <circle cx="10" cy="15" r="3.5" fill="#5ff3ec"></circle>
+      <line x1="13.5" y1="15" x2="24" y2="15" stroke="#5ff3ec" stroke-width="1" stroke-dasharray="2 2"></line>
+      <circle cx="27" cy="15" r="3" fill="#ffad9c"></circle>
+      <line x1="30" y1="15" x2="40" y2="15" stroke="#5ff3ec" stroke-width="1" stroke-dasharray="2 2"></line>
+      <circle cx="43" cy="15" r="3.5" fill="#5ff3ec"></circle>
+      <line x1="46.5" y1="15" x2="58" y2="15" stroke="#5ff3ec" stroke-width="1" stroke-dasharray="2 2"></line>
+      <circle cx="61" cy="15" r="3" fill="#c4b5fd"></circle>
+    </svg>
+  </div>
+</div>
+<div class="text-center max-w-3xl mx-auto mb-16">
+<div class="inline-flex items-center gap-2 text-aqua text-xs uppercase font-mono tracking-[0.3em] mb-3">
+<span class="w-1.5 h-1.5 rounded-full bg-aqua animate-ping"></span>
+Echoes From The Deep • Critical Acclaim
+</div>
+<h2 class="font-serif text-3xl sm:text-5xl text-pearl-pure tracking-tight mb-4">
+Whispers in the Ocean <span class="italic font-normal text-transparent bg-clip-text bg-gradient-to-r from-aqua via-pearl to-coral">Deep</span>
+</h2>
+<p class="text-pearl-dim text-sm sm:text-base font-normal max-w-2xl mx-auto leading-relaxed">
+Gastronomic reflections and oceanic memories from culinary critics, marine connoisseurs, and private descent guests.
+</p>
+<div class="inline-flex items-center gap-3 px-4 py-1.5 rounded-full border border-aqua/25 bg-surface-lowest/70 backdrop-blur-md mt-6 text-xs font-mono text-pearl">
+<span class="flex items-center text-aqua tracking-widest">★★★★★</span>
+<span class="text-aqua font-bold">4.98 / 5.0</span>
+<span class="text-pearl-dim/60">•</span>
+<span class="text-pearl-dim">142 Exclusive Descents Curated</span>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
+<div class="glass-card glass-card-hover rounded-2xl p-6 sm:p-8 flex flex-col justify-between border-aqua/20 relative group">
+<div>
+<div class="flex items-center justify-between mb-4">
+<div class="flex items-center gap-1 text-aqua text-xs">
+<span class="">✦</span><span class="">✦</span><span class="">✦</span><span class="">✦</span><span class="">✦</span>
+</div>
+<span class="text-[9px] font-mono uppercase px-2.5 py-0.5 rounded-full bg-aqua/10 text-aqua border border-aqua/20">Critic Selection</span>
+</div>
+<p class="font-serif text-pearl text-sm sm:text-base italic leading-relaxed mb-6">
+"Dining 30 meters beneath the Indian Ocean should be theatrical enough, but the botanical mixology and benthic gastronomy at ABYSSÉ transcend mere spectacle into sublime sensory meditation."
+</p>
+</div>
+<div class="pt-4 border-t border-aqua/10">
+<div class="font-serif text-pearl-pure font-semibold text-sm">Elena Rostova</div>
+<div class="text-[11px] text-pearl-dim font-sans mt-0.5">Lead Inspector, World Epicurean Journal</div>
+<div class="text-[10px] font-mono text-coral mt-2">✦✦✦ Three Sub-Ocean Stars · 2025</div>
+<div class="text-[9px] font-mono text-pearl-dim/60 mt-1">Descent Stratum: Midnight Deep Bar · Table 04</div>
+</div>
+</div>
+<div class="glass-card glass-card-hover rounded-2xl p-6 sm:p-8 flex flex-col justify-between border-aqua/20 relative group">
+<div>
+<div class="flex items-center justify-between mb-4">
+<div class="flex items-center gap-1 text-aqua text-xs">
+<span class="">✦</span><span class="">✦</span><span class="">✦</span><span class="">✦</span><span class="">✦</span>
+</div>
+<span class="text-[9px] font-mono uppercase px-2.5 py-0.5 rounded-full bg-aqua/10 text-aqua border border-aqua/20">Architectural Jury</span>
+</div>
+<p class="font-serif text-pearl text-sm sm:text-base italic leading-relaxed mb-6">
+"The acoustic silence inside the curved acrylic atrium is astonishing. You sip cold-extracted single-origin Geisha while pelagic stingrays glide inches above your velvet banquette."
+</p>
+</div>
+<div class="pt-4 border-t border-aqua/10">
+<div class="font-serif text-pearl-pure font-semibold text-sm">Julian Thorne</div>
+<div class="text-[11px] text-pearl-dim font-sans mt-0.5">Architecture &amp; Design Editor, Architrave</div>
+<div class="text-[10px] font-mono text-aqua mt-2">World's Most Visionary Subaquatic Venue</div>
+<div class="text-[9px] font-mono text-pearl-dim/60 mt-1">Descent Stratum: Grand Glass Atrium · 12:30 Caustics</div>
+</div>
+</div>
+<div class="glass-card glass-card-hover rounded-2xl p-6 sm:p-8 flex flex-col justify-between border-aqua/20 relative group">
+<div>
+<div class="flex items-center justify-between mb-4">
+<div class="flex items-center gap-1 text-coral text-xs">
+<span class="">✦</span><span class="">✦</span><span class="">✦</span><span class="">✦</span><span class="">✦</span>
+</div>
+<span class="text-[9px] font-mono uppercase px-2.5 py-0.5 rounded-full bg-coral/15 text-coral border border-coral/30">Verified Descent</span>
+</div>
+<p class="font-serif text-pearl text-sm sm:text-base italic leading-relaxed mb-6">
+"The Abyss Tiramisu resting on edible sea coral and the bioluminescent jellyfish encounter made our anniversary unforgettable. An ethereal sanctuary like nothing on Earth."
+</p>
+</div>
+<div class="pt-4 border-t border-aqua/10">
+<div class="font-serif text-pearl-pure font-semibold text-sm">Dr. Alistair &amp; Vivienne Vance</div>
+<div class="text-[11px] text-pearl-dim font-sans mt-0.5">Private Anemone Alcove Patrons</div>
+<div class="text-[10px] font-mono text-pearl mt-2">Verified 5-Star Oceanic Descent</div>
+<div class="text-[9px] font-mono text-pearl-dim/60 mt-1">Private Alcove 02 · Twilight Stratum</div>
+</div>
+</div>
+<div class="glass-card glass-card-hover rounded-2xl p-6 sm:p-8 flex flex-col justify-between border-aqua/20 relative group">
+<div>
+<div class="flex items-center justify-between mb-4">
+<div class="flex items-center gap-1 text-aqua text-xs">
+<span class="">✦</span><span class="">✦</span><span class="">✦</span><span class="">✦</span><span class="">✦</span>
+</div>
+<span class="text-[9px] font-mono uppercase px-2.5 py-0.5 rounded-full bg-aqua/10 text-aqua border border-aqua/20">Sommelier Guild</span>
+</div>
+<p class="font-serif text-pearl text-sm sm:text-base italic leading-relaxed mb-6">
+"Their sea-kelp infused Blue Current and nocturnal sea-glass mixology elevate sub-pelagic mixology into an art form. Remarkable cellar depth."
+</p>
+</div>
+<div class="pt-4 border-t border-aqua/10">
+<div class="font-serif text-pearl-pure font-semibold text-sm">Marcus Sterling</div>
+<div class="text-[11px] text-pearl-dim font-sans mt-0.5">Grand Maître Sommelier</div>
+<div class="text-[10px] font-mono text-coral mt-2">Pinnacle Award for Experimental Mixology</div>
+<div class="text-[9px] font-mono text-pearl-dim/60 mt-1">The Deep Bar · 22:00 Nocturne</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- END: ReviewsSection -->
+<!-- END: LocationSection -->
+</main>
+<!-- BEGIN: MainFooter -->
+<footer class="border-t border-aqua/15 bg-surface-lowest py-16 px-6 relative" data-purpose="site-footer" style="border-top: 1px solid rgba(56, 214, 208, 0.2); background: rgb(0, 0, 0) !important;">
+<div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-8"><!-- 35M+ Hadal Benthic Floor Indicator Badge -->
+<div class="w-full flex items-center justify-between pb-6 mb-8 border-b border-aqua/15 flex-wrap gap-3 text-xs font-mono">
+  <div class="inline-flex items-center gap-2 text-aqua">
+    <span class="w-2 h-2 rounded-full bg-aqua"></span>
+    <span class="uppercase tracking-widest text-pearl-pure font-bold">STRATUM 08 · 35M+ HADAL TRENCH BENTHIC FLOOR</span>
+    <span class="text-pearl-dim/70">— HYDROTHERMAL CRUST &amp; GRANITIC BEDROCK</span>
+  </div>
+  <div class="text-pearl-dim/60">
+    TERMINAL DEPTH: 35.4 METERS • ZERO PAR PENETRATION
+  </div>
+</div>
+<div class="flex flex-col items-center md:items-start text-center md:text-left">
+<div class="flex items-center gap-2 mb-2">
+<span class="w-2.5 h-2.5 rounded-full bg-aqua shadow-glow-aqua"></span>
+<span class="font-serif tracking-[0.25em] text-lg font-bold text-pearl-pure">ABYSSÉ</span>
+</div>
+<p class="text-xs text-pearl-dim max-w-sm">
+          A member of the Sub-Surface Gastronomic Consortium. Operating at zero environmental disturbance to native pelagic populations.
+        </p>
+</div>
+<div class="flex items-center gap-8 text-xs font-mono uppercase tracking-wider text-pearl-dim">
+<a class="hover:text-aqua transition-colors" href="#hero">Surface</a>
+<a class="hover:text-aqua transition-colors" href="#experience">Architecture</a>
+<a class="hover:text-aqua transition-colors" href="#menu">Gastronomy</a>
+<a class="hover:text-aqua transition-colors" href="#reservation">Bookings</a><a class="hover:text-aqua transition-colors" href="#reviews">Acclaim</a>
+</div>
+<div class="text-xs font-mono text-pearl-dim/50 text-center md:text-right">
+        © 2025 ABYSSÉ INC. ALL RIGHTS RESERVED.<br>
+<span class="text-aqua/60">DESCENT LAYER 30 METERS.</span>
+</div>
+</div>
+</footer>
+<!-- END: MainFooter -->
+<!-- BEGIN: LightboxModal -->
+<div aria-label="Image Detail Gallery" aria-modal="true" class="fixed inset-0 z-50 bg-surface-lowest/95 backdrop-blur-2xl hidden items-center justify-center p-4 sm:p-8" id="lightbox-modal" role="dialog">
+<!-- Close Button -->
+<button aria-label="Close Lightbox" class="absolute top-6 right-6 z-50 p-3 text-pearl-dim hover:text-aqua rounded-full bg-surface/50 border border-aqua/20 transition-colors" id="lightbox-close">
+<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+<path d="M6 18L18 6M6 6l12 12" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"></path>
+</svg>
+</button>
+<!-- Modal Content Container -->
+<div class="relative max-w-5xl w-full flex flex-col items-center">
+<div class="relative w-full max-h-[75vh] flex items-center justify-center overflow-hidden rounded-xl border border-aqua/30 shadow-2xl">
+<img alt="Ocean interior detail" class="max-w-full max-h-[72vh] object-contain" id="lightbox-img" src="">
+</div>
+<!-- Caption Information -->
+<div class="mt-6 text-center max-w-2xl">
+<h3 class="font-serif text-2xl text-pearl-pure font-bold mb-1" id="lightbox-title"></h3>
+<p class="text-xs sm:text-sm text-pearl-dim font-sans" id="lightbox-caption"></p>
+</div>
+<!-- Navigation Arrows -->
+<div class="flex items-center gap-6 mt-5">
+<button aria-label="Previous Image" class="px-4 py-1.5 rounded-full border border-aqua/30 text-pearl text-xs font-mono uppercase hover:border-aqua hover:text-aqua transition-colors" id="lightbox-prev">
+          ← Previous
+        </button>
+<span class="font-mono text-xs text-aqua" id="lightbox-counter">1 / 3</span>
+<button aria-label="Next Image" class="px-4 py-1.5 rounded-full border border-aqua/30 text-pearl text-xs font-mono uppercase hover:border-aqua hover:text-aqua transition-colors" id="lightbox-next">
+          Next →
+        </button>
+</div>
+</div>
+</div>
+<!-- END: LightboxModal -->
+<!-- JavaScript: Interactivity & UX Logic -->
+<script data-purpose="cursor-and-audio">
+    // Interactive Aqua Glow Cursor Trailing
+    const cursor = document.getElementById('cursor-halo');
+    if (cursor && window.matchMedia('(pointer: fine)').matches) {
+      window.addEventListener('mousemove', (e) => {
+        cursor.style.left = `${e.clientX}px`;
+        cursor.style.top = `${e.clientY}px`;
+      });
+    }
+
+    // Soundscape Controller & Audio Notification
+    const soundscapeBtn = document.getElementById('soundscape-toggle');
+    const eqContainer = document.getElementById('eq-container');
+    const soundLabel = document.getElementById('soundscape-label');
+    const audioToast = document.getElementById('audio-toast');
+    const audioToastMsg = document.getElementById('audio-toast-msg');
+    let isPlaying = false;
+    let toastTimeout;
+
+    function showAudioToast(message) {
+      if (toastTimeout) clearTimeout(toastTimeout);
+      audioToastMsg.textContent = message;
+      audioToast.classList.remove('opacity-0', 'translate-y-4', 'pointer-events-none');
+      audioToast.classList.add('opacity-100', 'translate-y-0');
+      toastTimeout = setTimeout(() => {
+        audioToast.classList.remove('opacity-100', 'translate-y-0');
+        audioToast.classList.add('opacity-0', 'translate-y-4', 'pointer-events-none');
+      }, 3200);
+    }
+
+    soundscapeBtn.addEventListener('click', () => {
+      isPlaying = !isPlaying;
+      soundscapeBtn.setAttribute('aria-pressed', isPlaying ? 'true' : 'false');
+      if (isPlaying) {
+        eqContainer.classList.add('eq-playing');
+        soundLabel.textContent = 'Abyss Audio: Active';
+        soundscapeBtn.classList.add('border-aqua', 'text-aqua');
+        showAudioToast('Deep Ocean Hydrophone active — 30m ambient waves & acoustics');
+      } else {
+        eqContainer.classList.remove('eq-playing');
+        soundLabel.textContent = 'Abyss Audio: Off';
+        soundscapeBtn.classList.remove('border-aqua', 'text-aqua');
+        showAudioToast('Underwater audio stream muted');
+      }
+    });
+  </script>
+<!-- BEGIN: Interactive Bioluminescent Jellyfish Creature Logic -->
+<script data-purpose="bioluminescent-jellyfish">
+  (function() {
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    const anchor = document.getElementById('jellyfish-anchor');
+    const physics = document.getElementById('jellyfish-physics');
+    const body = document.getElementById('jelly-body');
+    const badgeText = document.getElementById('jelly-badge-text');
+    const revealCard = document.getElementById('jelly-reveal-card');
+    const descendCta = document.getElementById('jelly-descend-cta');
+    const backGlow = document.getElementById('jelly-back-glow');
+    const rippleStage = document.getElementById('jelly-ripple-stage');
+    const sparkleLayer = document.getElementById('jelly-sparkle-layer');
+
+    if (!anchor || !physics || !body) return;
+
+    // Organic physics state
+    let targetX = 0, targetY = 0;
+    let currentX = 0, currentY = 0;
+    let mouseX = -9999, mouseY = -9999;
+    let isNear = false;
+    let isPulsing = false;
+    let cardVisible = false;
+
+    // Track Cursor Proximity
+    window.addEventListener('mousemove', (e) => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+    });
+
+    // Touch / Mobile positioning handler
+    window.addEventListener('touchmove', (e) => {
+      if (e.touches && e.touches[0]) {
+        mouseX = e.touches[0].clientX;
+        mouseY = e.touches[0].clientY;
+      }
+    }, { passive: true });
+
+    // Parallax & Lateral drift on Scroll
+    let scrollY = window.scrollY;
+    window.addEventListener('scroll', () => {
+      scrollY = window.scrollY;
+      const heroHeight = window.innerHeight;
+      if (scrollY > heroHeight) {
+        anchor.style.opacity = '0';
+        anchor.style.pointerEvents = 'none';
+      } else {
+        const factor = scrollY / heroHeight;
+        const driftX = factor * 80;
+        const driftY = factor * 140;
+        const fade = Math.max(0, 1 - factor * 1.25);
+        anchor.style.transform = `translate3d(${driftX}px, ${driftY}px, 0)`;
+        anchor.style.opacity = `${fade}`;
+        anchor.style.pointerEvents = fade < 0.2 ? 'none' : 'auto';
+      }
+    }, { passive: true });
+
+    // Magnetic Easing & Buoyancy Loop
+    let angle = 0;
+    function animatePhysics() {
+      if (!prefersReducedMotion) {
+        angle += 0.022;
+        const buoyancyX = Math.sin(angle * 0.7) * 9;
+        const buoyancyY = Math.cos(angle) * 14;
+
+        // Proximity calculation relative to jellyfish center
+        const rect = physics.getBoundingClientRect();
+        const centerX = rect.left + rect.width / 2;
+        const centerY = rect.top + rect.height * 0.35;
+
+        const dx = mouseX - centerX;
+        const dy = mouseY - centerY;
+        const dist = Math.hypot(dx, dy);
+        const radius = 230;
+
+        if (dist < radius && !isPulsing) {
+          if (!isNear) {
+            isNear = true;
+            if (badgeText) badgeText.textContent = 'Descend To Table';
+            if (backGlow) {
+              backGlow.classList.remove('opacity-60');
+              backGlow.classList.add('opacity-95');
+              backGlow.style.filter = 'drop-shadow(0 0 45px #38d6d0)';
+            }
+          }
+          // Subtle magnetic attraction pull
+          const pull = (1 - dist / radius) * 38;
+          const pullAngle = Math.atan2(dy, dx);
+          targetX = Math.cos(pullAngle) * pull + buoyancyX;
+          targetY = Math.sin(pullAngle) * pull + buoyancyY;
+        } else {
+          if (isNear) {
+            isNear = false;
+            if (badgeText) badgeText.textContent = 'Click To Descend';
+            if (backGlow) {
+              backGlow.classList.remove('opacity-95');
+              backGlow.classList.add('opacity-60');
+              backGlow.style.filter = '';
+            }
+          }
+          targetX = buoyancyX;
+          targetY = buoyancyY;
+        }
+
+        // Fluid spring interpolation
+        currentX += (targetX - currentX) * 0.08;
+        currentY += (targetY - currentY) * 0.08;
+
+        physics.style.transform = `translate3d(${currentX}px, ${currentY}px, 0)`;
+      }
+
+      requestAnimationFrame(animatePhysics);
+    }
+    requestAnimationFrame(animatePhysics);
+
+    // Click / Tap Pulse Interaction -> DIRECT DESCENT TO RESERVATION
+    function triggerPulse(e) {
+      if (e) e.stopPropagation();
+
+      // 1. Bell contraction and expansion pulse
+      body.style.transition = 'transform 0.28s cubic-bezier(0.18, 0.89, 0.32, 1.28), filter 0.3s ease';
+      body.style.transform = 'scale(0.86, 1.18) translateY(-26px)';
+      body.style.filter = 'drop-shadow(0 0 45px #5ff3ec) brightness(1.5)';
+
+      // 2. Spawn Expanding Aqua Ripple Rings
+      createShockwave();
+      setTimeout(createShockwave, 220);
+
+      // 3. Spawn Bioluminescent Sparkle Plankton Motes
+      spawnSparkles(18);
+
+      // 4. Return from pulse with graceful glide
+      setTimeout(() => {
+        body.style.transform = 'scale(1.12, 0.9) translateY(8px)';
+        setTimeout(() => {
+          body.style.transition = 'all 0.6s cubic-bezier(0.16, 1, 0.3, 1)';
+          body.style.transform = '';
+          body.style.filter = '';
+        }, 340);
+      }, 300);
+
+      // 5. Briefly show card feedback
+      if (revealCard) {
+        cardVisible = true;
+        revealCard.classList.remove('opacity-0', 'translate-y-3', 'pointer-events-none');
+        revealCard.classList.add('opacity-100', 'translate-y-0', 'pointer-events-auto');
+        if (badgeText) badgeText.textContent = 'Descending...';
+      }
+
+      // 6. DIRECT DESCENT: Smoothly scroll directly to the Reservation Section
+      const reservationEl = document.getElementById('reservation');
+      if (reservationEl) {
+        // Small graceful pause so user sees the initial ripple ignition
+        setTimeout(() => {
+          reservationEl.scrollIntoView({ behavior: 'smooth' });
+        }, 300);
+      }
+    }
+
+    function createShockwave() {
+      if (!rippleStage) return;
+      const ripple = document.createElement('div');
+      ripple.className = 'ripple-wave';
+      rippleStage.appendChild(ripple);
+      setTimeout(() => ripple.remove(), 1600);
+    }
+
+    function spawnSparkles(count) {
+      if (!sparkleLayer) return;
+      for (let i = 0; i < count; i++) {
+        const spark = document.createElement('div');
+        spark.className = 'jelly-spark';
+        const size = Math.random() * 5 + 3;
+        spark.style.width = `${size}px`;
+        spark.style.height = `${size}px`;
+        spark.style.left = `${50 + (Math.random() * 50 - 25)}%`;
+        spark.style.top = `${40 + (Math.random() * 30 - 15)}%`;
+        
+        const dx = (Math.random() - 0.5) * 160 + 'px';
+        const dy = -(Math.random() * 110 + 40) + 'px';
+        spark.style.setProperty('--dx', dx);
+        spark.style.setProperty('--dy', dy);
+        spark.style.animationDuration = `${1.2 + Math.random() * 0.9}s`;
+
+        sparkleLayer.appendChild(spark);
+        setTimeout(() => spark.remove(), 2100);
+      }
+    }
+
+    physics.addEventListener('click', triggerPulse);
+    physics.addEventListener('touchend', (e) => {
+      triggerPulse(e);
+    });
+
+    // Close reveal card on "Descend" CTA click & scroll to reservation
+    if (descendCta) {
+      descendCta.addEventListener('click', (e) => {
+        e.preventDefault();
+        const reservationEl = document.getElementById('reservation');
+        if (reservationEl) {
+          reservationEl.scrollIntoView({ behavior: 'smooth' });
+        }
+        setTimeout(() => {
+          if (revealCard) {
+            revealCard.classList.add('opacity-0', 'translate-y-3', 'pointer-events-none');
+            revealCard.classList.remove('opacity-100', 'translate-y-0', 'pointer-events-auto');
+            cardVisible = false;
+          }
+          if (badgeText) badgeText.textContent = 'Click To Descend';
+        }, 400);
+      });
+    }
+
+    // Dismiss card if user clicks anywhere outside
+    document.addEventListener('click', (e) => {
+      if (cardVisible && !physics.contains(e.target)) {
+        revealCard.classList.add('opacity-0', 'translate-y-3', 'pointer-events-none');
+        revealCard.classList.remove('opacity-100', 'translate-y-0', 'pointer-events-auto');
+        cardVisible = false;
+        if (badgeText) badgeText.textContent = 'Click To Descend';
+      }
+    });
+
+  })();
+</script>
+<!-- END: Interactive Bioluminescent Jellyfish Creature Logic -->
+<script data-purpose="navigation-depth-hud">
+    // Vertical Depth HUD & Section Scroll Spy
+    const sections = [
+      { id: 'hero', depth: '0M' },
+      { id: 'experience', depth: '10M' },
+      { id: 'menu', depth: '20M' },
+      { id: 'the-deep-bar', depth: '30M' }
+    ];
+    const depthNodes = document.querySelectorAll('.depth-node');
+    const hudCurrentDepth = document.getElementById('hud-current-depth');
+
+    // Click on depth node smooth-scrolls
+    depthNodes.forEach((node) => {
+      node.addEventListener('click', () => {
+        const targetId = node.getAttribute('data-depth-target');
+        const targetEl = document.getElementById(targetId);
+        if (targetEl) {
+          targetEl.scrollIntoView({ behavior: 'smooth' });
+        }
+      });
+    });
+
+    // Update HUD indicator on Scroll
+    window.addEventListener('scroll', () => {
+      const scrollPosition = window.scrollY + window.innerHeight / 3;
+      let activeDepth = '0M';
+      let activeTargetId = 'hero';
+
+      sections.forEach((sec) => {
+        const el = document.getElementById(sec.id);
+        if (el && el.offsetTop <= scrollPosition) {
+          activeDepth = sec.depth;
+          activeTargetId = sec.id;
+        }
+      });
+
+      if (hudCurrentDepth) hudCurrentDepth.textContent = activeDepth;
+
+      depthNodes.forEach((btn) => {
+        const dot = btn.querySelector('span');
+        if (btn.getAttribute('data-depth-target') === activeTargetId) {
+          dot.classList.add('bg-aqua', 'scale-125', 'shadow-glow-aqua');
+        } else {
+          dot.classList.remove('bg-aqua', 'scale-125', 'shadow-glow-aqua');
+        }
+      });
+    });
+
+    // Mobile Drawer Navigation
+    const mobileOpenBtn = document.getElementById('mobile-menu-open');
+    const mobileCloseBtn = document.getElementById('mobile-menu-close');
+    const mobileDrawer = document.getElementById('mobile-drawer');
+    const mobileLinks = document.querySelectorAll('.mobile-nav-link');
+
+    function toggleMobileMenu(open) {
+      if (open) {
+        mobileDrawer.classList.remove('translate-x-full');
+        mobileDrawer.setAttribute('aria-hidden', 'false');
+        mobileOpenBtn.setAttribute('aria-expanded', 'true');
+        document.body.style.overflow = 'hidden';
+      } else {
+        mobileDrawer.classList.add('translate-x-full');
+        mobileDrawer.setAttribute('aria-hidden', 'true');
+        mobileOpenBtn.setAttribute('aria-expanded', 'false');
+        document.body.style.overflow = '';
+      }
+    }
+
+    mobileOpenBtn.addEventListener('click', () => toggleMobileMenu(true));
+    mobileCloseBtn.addEventListener('click', () => toggleMobileMenu(false));
+    mobileLinks.forEach(link => {
+      link.addEventListener('click', () => toggleMobileMenu(false));
+    });
+  </script>
+<script data-purpose="menu-filter-and-reservation">
+    // Menu Category Filtering
+    const filterBtns = document.querySelectorAll('.menu-filter-btn');
+    const menuCards = document.querySelectorAll('.menu-card');
+
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        // Button state style
+        filterBtns.forEach(b => {
+          b.classList.remove('bg-aqua', 'text-surface-lowest', 'shadow-glow-aqua');
+          b.classList.add('text-pearl-dim');
+          b.setAttribute('aria-selected', 'false');
+        });
+        btn.classList.add('bg-aqua', 'text-surface-lowest', 'shadow-glow-aqua');
+        btn.classList.remove('text-pearl-dim');
+        btn.setAttribute('aria-selected', 'true');
+
+        const filter = btn.getAttribute('data-filter');
+
+        menuCards.forEach(card => {
+          const category = card.getAttribute('data-category');
+          if (filter === 'all' || category === filter) {
+            card.style.display = 'flex';
+            setTimeout(() => {
+              card.style.opacity = '1';
+              card.style.transform = 'translateY(0)';
+            }, 30);
+          } else {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(12px)';
+            setTimeout(() => {
+              card.style.display = 'none';
+            }, 250);
+          }
+        });
+      });
+    });
+
+    // Reservation Interactive Submission
+    const reservationForm = document.getElementById('reservation-form');
+    const reservationConfirm = document.getElementById('reservation-confirmation');
+    const resetReservationBtn = document.getElementById('reset-reservation-btn');
+
+    if (reservationForm) {
+      // Default date to tomorrow
+      const tomorrow = new Date();
+      tomorrow.setDate(tomorrow.getDate() + 1);
+      const dateInput = document.getElementById('res-date');
+      if (dateInput) {
+        dateInput.value = tomorrow.toISOString().split('T')[0];
+      }
+
+      reservationForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+
+        const name = document.getElementById('res-name').value || 'Honored Guest';
+        const date = document.getElementById('res-date').value || 'Tomorrow';
+        const slot = document.getElementById('res-slot').value;
+        const guests = document.getElementById('res-guests').value;
+
+        // Populate Confirmation Card
+        document.getElementById('confirm-name').textContent = name;
+        document.getElementById('confirm-date').textContent = date;
+        document.getElementById('confirm-time').textContent = slot;
+        document.getElementById('confirm-party').textContent = guests;
+        document.getElementById('confirm-id').textContent = 'ABY-' + Math.floor(1000 + Math.random() * 9000) + '-OCN';
+
+        // Switch Cards
+        reservationForm.classList.add('hidden');
+        reservationConfirm.classList.remove('hidden');
+      });
+
+      resetReservationBtn.addEventListener('click', () => {
+        reservationConfirm.classList.add('hidden');
+        reservationForm.classList.remove('hidden');
+        reservationForm.reset();
+        if (dateInput) dateInput.value = tomorrow.toISOString().split('T')[0];
+      });
+    }
+  </script>
+<script data-purpose="lightbox-gallery">
+    // Lightbox Modal for Architectural Mosaic & Sanctuary
+    const galleryItems = [
+      {
+        src: "https://lh3.googleusercontent.com/aida/AEtjO1UnsysO0Qf5Adm5WgsjrzT4xJOyKiztkT0PzUQVttB0kpJWWZfiOM5NLFm60Uc1rGUvCnJzdMbyki6Wq8a4Mr7GWRtvtTrJXmH0TBEwLTDAAigthNlWJcqYRxcACYuvtMq0GgTO-midPBM5IVLAWu6-ZE7d7wol-Qw02hw5HBTPwSnsE23fqAeBjLxh52_vvjXIHYhdfyYzKbbMpeCd_N_pOkL7sq15nbb-IS1pl2YdQLPx2_2kUpaDZxA",
+        title: "The Grand Glass Atrium — 30M Depth",
+        caption: "Soaring 180° curved acrylic viewing tunnel looking directly into the blue deep ocean with pelagic manta rays and living coral ecosystems."
+      },
+      {
+        src: "https://lh3.googleusercontent.com/aida/AEtjO1XC8xxeaIN-0mu8L-GgGgJx4S7JaqzGl_UHhtxZUdPqXBxgsvcbH5qSOAuyNpiPxvAD_jLXZXOoUY60wQEDrzXDanwgo3T_F7HMXpcRhWp-yX-nr5HI1zk3ncdxqPgq7UmGqw-sN4ClwkGbHkh1lJ-wIfO-uRKm1jiVwbx8aF8v3iT1uiFnaQBMgirRYowFLKXMEImRuCsYWyX4eBVdJxL_tgWBE_tTcNj_GJpWASB3W1Ot1xmeRIkeaQJa",
+        title: "The Velvet Anemone Sanctuary — 10M Depth",
+        caption: "Private dining booth ensconced in deep marine-blue velvet with an organic brass anemone luminaire and schools of trevally."
+      },
+      {
+        src: "https://lh3.googleusercontent.com/aida/AEtjO1Xkj1q09IUcIdWbhkn-5YB-rt-a7nwfUAHFMZymzJdznzHTryh4lCJ-KXqc0r8BJhvqiRnGir2a6-qzanM3Dj0TEwss-UCcCsGlGJ8_3CIgTf-k99otXl689VdRjjAbJAFq1XkyDEdH-AL9uA8upbSsBeqCMKFKxFjmTLcccNI7Pl2_sAW_61uOJ2OKKA-VjVpPeeLzhcBUmq6JS1Oay_GO-gygyBgtquZSreDD4WLcBJLQPPcbPWA4PV0b",
+        title: "The Deep Bar — Midnight Stratum",
+        caption: "A twelve-meter raw carved glowing sea-glass slab accompanied by midnight ambient phytoplankton illumination."
+      }
+    ];
+
+    let currentLightboxIdx = 0;
+    const lightboxModal = document.getElementById('lightbox-modal');
+    const lightboxImg = document.getElementById('lightbox-img');
+    const lightboxTitle = document.getElementById('lightbox-title');
+    const lightboxCaption = document.getElementById('lightbox-caption');
+    const lightboxCounter = document.getElementById('lightbox-counter');
+    const lightboxClose = document.getElementById('lightbox-close');
+    const lightboxPrev = document.getElementById('lightbox-prev');
+    const lightboxNext = document.getElementById('lightbox-next');
+
+    function openLightbox(index) {
+      currentLightboxIdx = index;
+      updateLightboxContent();
+      lightboxModal.classList.remove('hidden');
+      lightboxModal.classList.add('flex');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox() {
+      lightboxModal.classList.add('hidden');
+      lightboxModal.classList.remove('flex');
+      document.body.style.overflow = '';
+    }
+
+    function updateLightboxContent() {
+      const item = galleryItems[currentLightboxIdx];
+      lightboxImg.src = item.src;
+      lightboxTitle.textContent = item.title;
+      lightboxCaption.textContent = item.caption;
+      lightboxCounter.textContent = `${currentLightboxIdx + 1} / ${galleryItems.length}`;
+    }
+
+    // Attach click triggers to all elements containing data-lightbox-src
+    document.querySelectorAll('[data-lightbox-src]').forEach((elem) => {
+      elem.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const clickedSrc = elem.getAttribute('data-lightbox-src');
+        const matchedIdx = galleryItems.findIndex(item => item.src === clickedSrc);
+        openLightbox(matchedIdx >= 0 ? matchedIdx : 0);
+      });
+    });
+
+    lightboxClose.addEventListener('click', closeLightbox);
+    lightboxPrev.addEventListener('click', () => {
+      currentLightboxIdx = (currentLightboxIdx - 1 + galleryItems.length) % galleryItems.length;
+      updateLightboxContent();
+    });
+    lightboxNext.addEventListener('click', () => {
+      currentLightboxIdx = (currentLightboxIdx + 1) % galleryItems.length;
+      updateLightboxContent();
+    });
+
+    // Close on backdrop click & ESC key
+    lightboxModal.addEventListener('click', (e) => {
+      if (e.target === lightboxModal) closeLightbox();
+    });
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && !lightboxModal.classList.contains('hidden')) {
+        closeLightbox();
+      }
+    });
+  </script>
+
+
+
+
+
+
+</body></html>
